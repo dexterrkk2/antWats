@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AntSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<GameObject> ants;
+    public List<Transform> spawnPoints;
+    public int count;
+    public void antSpawner()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (count >= spawnPoints.Count - 1)
+        {
+            count = 0;
+        }
+        Instantiate(ants[0], spawnPoints[0]);
+        count++;
     }
 }
