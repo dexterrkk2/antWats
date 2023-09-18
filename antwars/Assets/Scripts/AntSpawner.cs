@@ -9,11 +9,11 @@ public class AntSpawner : MonoBehaviour
     public int count;
     public void antSpawner()
     {
-        if (count >= spawnPoints.Count - 1)
+        if (count >= spawnPoints.Count)
         {
             count = 0;
         }
-        Instantiate(ants[0], spawnPoints[0]);
+        Instantiate(ants[0], spawnPoints[count]);
         count++;
     }
 }
