@@ -13,7 +13,7 @@ public class AntSpawner : MonoBehaviour
         {
             count = 0;
         }
-        Instantiate(ants[0], spawnPoints[count]);
+        Instantiate(ants[0], spawnPoints[count].position, Quaternion.identity);
         count++;
     }
 }

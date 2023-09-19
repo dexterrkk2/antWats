@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance;
+    private AntBehavior ant;
     public int playerClan;
     public void Awake()
     {
