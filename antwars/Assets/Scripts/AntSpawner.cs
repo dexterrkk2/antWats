@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AntSpawner : MonoBehaviour
+using Photon.Pun;
+public class AntSpawner : MonoBehaviourPunCallbacks
 {
-    public List<GameObject> ants;
     public List<Transform> spawnPoints;
+    public string antPrefab;
     public int count;
+    public int playerClan;
     public void antSpawner()
     {
         if (count >= spawnPoints.Count)
         {
             count = 0;
         }
-        Instantiate(ants[0], spawnPoints[count].position, Quaternion.identity);
+        GameObject ant =PhotonNetwork.Instantiate(antPrefab, spawnPoints[count].position, Quaternion.identity);
+        AntBehavior antBehavior = ant.GetComponent<AntBehavior>();
+        antBehavior.initialPlayerClan = playerClan;
         count++;
     }
 }

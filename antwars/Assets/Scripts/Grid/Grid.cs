@@ -7,7 +7,6 @@ public class Grid : MonoBehaviour
     public int width, height, scale;
     public Tile tilePrefab;
     public Vector3 offset;
-    public Transform mainCamera;
     public Transform gridParent;
     public List<Color> colors;
     int colorCounter;
@@ -31,6 +30,5 @@ public class Grid : MonoBehaviour
                 colorCounter=0;
             }
         }
-        mainCamera.transform.position = new Vector3(width*2, height/2+scale, height*2);
     }
 }
