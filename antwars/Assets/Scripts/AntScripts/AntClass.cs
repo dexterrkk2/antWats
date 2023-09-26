@@ -11,6 +11,7 @@ public class AntClass : MonoBehaviourPunCallbacks
     public bool secondClick = false;
     public int _playerClan;
     public int hp;
+    [PunRPC]
     public void AssignType(int playerClan)
     {
         _playerClan = playerClan;
