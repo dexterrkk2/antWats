@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         antSpawner.playerClan = id - 1;
         if (!photonView.IsMine)
         {
-            gameObject.SetActive(false);
+            UI.gameObject.SetActive(false);
         }
         mouse.playerClan = id - 1;
     }

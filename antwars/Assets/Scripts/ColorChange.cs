@@ -15,5 +15,6 @@ public class ColorChange : MonoBehaviourPunCallbacks
     public void SetColor()
     {
         meshRenderer.material.color = color;
+        Debug.Log(color);
     }
 }

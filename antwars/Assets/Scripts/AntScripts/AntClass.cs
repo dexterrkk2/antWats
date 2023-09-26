@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class AntClass : MonoBehaviour
+public class AntClass : MonoBehaviourPunCallbacks
 {
     public string type;
     public List<string> types;
@@ -20,6 +20,7 @@ public class AntClass : MonoBehaviour
     {
         selected = true;
     }
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         hp -= damage;
@@ -40,7 +41,6 @@ public class AntClass : MonoBehaviour
                             targetSquare.z = Mathf.Clamp(targetSquare.z, transform.position.x - maxDistance, transform.position.z + maxDistance);
                         }
                         float time = (targetSquare.magnitude/ moveSpeed/10);
-                        Debug.Log(time);
                         StartCoroutine(MoveDuration(transform.position, targetSquare, time));
                         selected = false;
                         secondClick = false;

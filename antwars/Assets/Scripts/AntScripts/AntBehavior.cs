@@ -29,6 +29,7 @@ public class AntBehavior : AntClass
     }
     public void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("collide");
         if (collision.collider.tag == "Ant")
         {
             AntBehavior ant=collision.collider.GetComponent<AntBehavior>();
