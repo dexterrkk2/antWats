@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public AntSpawner antSpawner;
     public MousePosition mouse;
     public Canvas UI;
+    public Camera playerCam;
     [PunRPC]
     public void Initialize(Player player)
     {
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
         {
             UI.gameObject.SetActive(false);
+            playerCam.gameObject.SetActive(false);
         }
         mouse.playerClan = id - 1;
     }

@@ -16,8 +16,8 @@ public class AntBehavior : AntClass
     {
         player = FindObjectOfType<PlayerController>();
         antCam.gameObject.SetActive(false);
-        AssignType(initialPlayerClan);
-        colorChange.color = colors[initialPlayerClan];
+        AssignType(player.id-1);
+        colorChange.color = colors[playerClan];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
     }
     public void Update()
