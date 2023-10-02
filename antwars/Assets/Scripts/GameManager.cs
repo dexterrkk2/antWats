@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     [Header("Stats")]
     public bool gameEnded = false; // has the game ended?
-    public float timeToWin; // time a player needs to hold the hat to win
-    public float invincibleDuration; // how long after a player gets the hat, are they invincible
     [Header("Players")]
     public string playerPrefabLocation; // path in Resources folder to the Player prefab
     public Transform[] spawnPoints; // array of all available spawn points

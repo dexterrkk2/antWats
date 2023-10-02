@@ -152,8 +152,7 @@ MonoBehaviour:
   id: 0
   mouse: {fileID: 6160012335028575398}
   UI: {fileID: 1425481931663375834}
-  antCam: {fileID: 2633232063909555285}
-  soldiers: []
+  playerCam: {fileID: 2633232063909555285}
 --- !u!114 &6160012335028575398
 MonoBehaviour:
   m_ObjectHideFlags: 0
