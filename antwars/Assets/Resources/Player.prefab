@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6160012335028575400}
   - component: {fileID: 6160012335028575398}
   - component: {fileID: 6160012335028575397}
-  - component: {fileID: 5212289141154122831}
+  - component: {fileID: 4508299662420261008}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -150,9 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickName: 
   id: 0
-  antSpawner: {fileID: 5212289141154122831}
   mouse: {fileID: 6160012335028575398}
   UI: {fileID: 1425481931663375834}
+  antCam: {fileID: 2633232063909555285}
+  soldiers: []
 --- !u!114 &6160012335028575398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &5212289141154122831
+--- !u!114 &4508299662420261008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,11 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614a10021eb4ff644b39d04c03331bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 6160012335028575399}
-  antPrefab: Ants
-  count: 0
-  playerClan: 0
+  player: {fileID: 6160012335028575400}
+  gameManager: {fileID: 0}
 --- !u!1 &7250515956540654130
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,10 +406,10 @@ PrefabInstance:
     - target: {fileID: 444657317238917131, guid: c18352671e88ab94192deccd9677475b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5212289141154122831}
+      objectReference: {fileID: 4508299662420261008}
     - target: {fileID: 444657317238917131, guid: c18352671e88ab94192deccd9677475b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: antSpawner
+      value: antEvent
       objectReference: {fileID: 0}
     - target: {fileID: 444657317238917133, guid: c18352671e88ab94192deccd9677475b, type: 3}
       propertyPath: m_Name

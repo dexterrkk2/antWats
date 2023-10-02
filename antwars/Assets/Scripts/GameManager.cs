@@ -14,14 +14,23 @@ public class GameManager : MonoBehaviourPunCallbacks
     public string playerPrefabLocation; // path in Resources folder to the Player prefab
     public Transform[] spawnPoints; // array of all available spawn points
     public PlayerController[] players; // array of all the players
-    public int playerWithHat; // id of the player with the hat
     private int playersInGame; // number of players in the game
+    public int count;
+    public string antPrefab;
     // instance
     public static GameManager instance;
     void Awake()
     {
         // instance
         instance = this;
+    }
+    private void OnEnable()
+    {
+        AntSpawner.onSpawn += antSpawner;
+    }
+    private void OnDisable ()
+    {
+        AntSpawner.onSpawn -= antSpawner;
     }
     // Start is called before the first frame update
     void Start()
@@ -58,6 +67,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         // get the player script
         PlayerController playerScript = playerObj.GetComponent<PlayerController>();
         playerScript.photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
+    }
+    [PunRPC]
+    public void antSpawner()
+    {
+        if (count >= spawnPoints.Length-1)
+        {
+            count = 0;
+        }
+        PhotonNetwork.Instantiate(antPrefab, spawnPoints[count].position, Quaternion.identity);
+        count++;
     }
     public PlayerController GetPlayer(int playerId)
     {

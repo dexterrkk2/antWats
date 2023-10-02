@@ -4,19 +4,17 @@ using UnityEngine;
 using Photon.Pun;
 public class AntSpawner : MonoBehaviourPunCallbacks
 {
-    public List<Transform> spawnPoints;
-    public string antPrefab;
-    public int count;
-    public int playerClan;
-    public void antSpawner()
+    public PlayerController player;
+    public delegate void SpawnEvent();
+    public static event SpawnEvent onSpawn;
+    public GameManager gameManager;
+    private void Start()
     {
-        if (count >= spawnPoints.Count)
-        {
-            count = 0;
-        }
-        GameObject ant =PhotonNetwork.Instantiate(antPrefab, spawnPoints[count].position, Quaternion.identity);
-        AntBehavior antBehavior = ant.GetComponent<AntBehavior>();
-        antBehavior.initialPlayerClan = playerClan;
-        count++;
+        gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
+    }
+    public void antEvent()
+    {
+        Debug.Log(player.id - 1);
+        onSpawn();
     }
 }

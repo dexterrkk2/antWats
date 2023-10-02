@@ -470,7 +470,8 @@ MonoBehaviour:
   - {fileID: 1543014760}
   - {fileID: 1808551361}
   players: []
-  playerWithHat: 0
+  count: 0
+  antPrefab: Ants
 --- !u!114 &1342368325
 MonoBehaviour:
   m_ObjectHideFlags: 0

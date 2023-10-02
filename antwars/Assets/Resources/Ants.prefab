@@ -232,7 +232,6 @@ MonoBehaviour:
   - {r: 0.085395135, g: 0.9528302, b: 0.11438737, a: 0}
   - {r: 0.62975544, g: 0.06808472, b: 0.9622642, a: 0}
   initialPlayerClan: 0
-  playerClan: 0
   maxDistance: 30
   moveSpeed: 10
   colorChange: {fileID: 1694067132765290094}
