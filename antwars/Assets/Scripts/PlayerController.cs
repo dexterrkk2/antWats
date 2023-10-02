@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         GameManager.instance.players[id - 1] = this;
         if (!photonView.IsMine)
         {
-            UI.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             playerCam.gameObject.SetActive(false);
         }
         mouse.playerClan = id - 1;
