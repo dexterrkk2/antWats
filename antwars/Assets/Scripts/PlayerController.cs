@@ -10,12 +10,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public int id;
     public MousePosition mouse;
     public Canvas UI;
-<<<<<<< Updated upstream
     public Camera playerCam;
-=======
-    public Camera antCam;
     public List<AntBehavior> soldiers;
->>>>>>> Stashed changes
     [PunRPC]
     public void Initialize(Player player)
     {
@@ -24,13 +20,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         GameManager.instance.players[id - 1] = this;
         if (!photonView.IsMine)
         {
-<<<<<<< Updated upstream
             UI.gameObject.SetActive(false);
             playerCam.gameObject.SetActive(false);
-=======
-            gameObject.SetActive(false);
-            antCam.gameObject.SetActive(false);
->>>>>>> Stashed changes
         }
         mouse.playerClan = id - 1;
     }

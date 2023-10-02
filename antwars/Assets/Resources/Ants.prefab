@@ -112,9 +112,9 @@ GameObject:
   - component: {fileID: 951429682352281776}
   - component: {fileID: 8473050867943732132}
   - component: {fileID: 7440980908179157942}
-  - component: {fileID: -6939913458725653369}
-  - component: {fileID: 3926408028860006504}
   - component: {fileID: 1694067132765290094}
+  - component: {fileID: 4583646610336722760}
+  - component: {fileID: 4795846885947974093}
   m_Layer: 0
   m_Name: Ants
   m_TagString: Ant
@@ -232,10 +232,41 @@ MonoBehaviour:
   - {r: 0.085395135, g: 0.9528302, b: 0.11438737, a: 0}
   - {r: 0.62975544, g: 0.06808472, b: 0.9622642, a: 0}
   initialPlayerClan: 0
+  playerClan: 0
   maxDistance: 30
   moveSpeed: 10
   colorChange: {fileID: 1694067132765290094}
---- !u!114 &-6939913458725653369
+--- !u!114 &1694067132765290094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824723153515292296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5ea5f934e99274681c577566009e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 951429682352281776}
+  color: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &4583646610336722760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824723153515292296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
+--- !u!114 &4795846885947974093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,40 +285,10 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 3926408028860006504}
+  - {fileID: 4583646610336722760}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3926408028860006504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8824723153515292296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
---- !u!114 &1694067132765290094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8824723153515292296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d5ea5f934e99274681c577566009e73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 951429682352281776}
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1594399748505182459
 PrefabInstance:
   m_ObjectHideFlags: 0
