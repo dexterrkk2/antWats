@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public string antPrefab;
     // instance
     public static GameManager instance;
+    public List<GameObject> ants;
     void Awake()
     {
         // instance
@@ -73,7 +74,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             count = 0;
         }
-        PhotonNetwork.Instantiate(antPrefab, spawnPoints[count].position, Quaternion.identity);
+        GameObject ant =PhotonNetwork.Instantiate(antPrefab, spawnPoints[count].position, Quaternion.identity);
+        ants.Add(ant);
         count++;
     }
     public PlayerController GetPlayer(int playerId)
@@ -83,6 +85,25 @@ public class GameManager : MonoBehaviourPunCallbacks
     public PlayerController GetPlayer(GameObject playerObject)
     {
         return players.First(x => x.gameObject == playerObject);
+    }
+    public void antKillScript()
+    {
+        for (int i=0; i< ants.Count; i++)
+        {
+            for(int j =0; j< ants.Count; j++)
+            {
+                if (ants[i].gameObject.transform.position == ants[j].gameObject.transform.position)
+                {
+                    AntBehavior ant1 = (ants[i].GetComponent<AntBehavior>());
+                    AntBehavior ant2 = (ants[j].GetComponent<AntBehavior>());
+                    if (ant1.type != ant2.type)
+                    {
+                        ant1.TakeDamage(ant2.damage);
+                        ant2.TakeDamage(ant1.damage);
+                    }
+                }
+            }
+        }
     }
     // Update is called once per frame
     void Update()
