@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
+
 public class PlayerController : MonoBehaviourPunCallbacks
 {
     public Player photonPlayer;
@@ -11,6 +13,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public MousePosition mouse;
     public Canvas UI;
     public Camera playerCam;
+    public int resouce;
+    public TextMeshProUGUI resouceText;
+    public void OnEnable()
+    {
+        AntSpawner.onSpawn += ResourceUse;
+    }
+    public void OnDisable()
+    {
+        AntSpawner.onSpawn -= ResourceUse;
+    }
     [PunRPC]
     public void Initialize(Player player)
     {
@@ -23,5 +35,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
             playerCam.gameObject.SetActive(false);
         }
         mouse.playerClan = id - 1;
+        resouce = 10;
+    }
+    public void ResourceUse()
+    {
+        resouce--;
+    }
+    public void Update()
+    {
+        resouceText.text = "Food Left: " + resouce;
     }
 }
