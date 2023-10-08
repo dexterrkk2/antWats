@@ -14,7 +14,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public Canvas UI;
     public Camera playerCam;
     public int resouce;
+    public bool hasLost;
     public TextMeshProUGUI resouceText;
+    public List<AntBehavior> soldiers;
     public void OnEnable()
     {
         AntSpawner.onSpawn += ResourceUse;
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         photonPlayer = player;
         id = player.ActorNumber;
-        GameManager.instance.players[id - 1] = this;
+        GameManager.instance.players[id-1] = this;
         if (!photonView.IsMine)
         {
             gameObject.SetActive(false);
@@ -40,6 +42,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void ResourceUse()
     {
         resouce--;
+        checkLoseGame();
+    }
+    public void checkLoseGame()
+    {
+        if (resouce == 0)
+        {
+            GameManager.instance.LoseGame(this);
+        }  
     }
     public void Update()
     {

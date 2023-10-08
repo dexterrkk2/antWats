@@ -12,9 +12,8 @@ public class AntSpawner : MonoBehaviourPunCallbacks
     {
         gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
     }
-    public void antEvent()
+    public void AntEvent()
     {
-        Debug.Log(player.id - 1);
         onSpawn();
     }
 }

@@ -461,8 +461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEnded: 0
-  timeToWin: 0
-  invincibleDuration: 0
   playerPrefabLocation: Player
   spawnPoints:
   - {fileID: 951064651}
@@ -472,6 +470,9 @@ MonoBehaviour:
   players: []
   count: 0
   antPrefab: Ants
+  ants: []
+  loseSceneNumber: 2
+  winSceneNumber: 3
 --- !u!114 &1342368325
 MonoBehaviour:
   m_ObjectHideFlags: 0

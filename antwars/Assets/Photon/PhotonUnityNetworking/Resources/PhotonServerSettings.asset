@@ -50,6 +50,10 @@ MonoBehaviour:
   - AssignType
   - TakeDamage
   - antSpawner
+  - Die
+  - checkWinCondition
+  - LoseGame
+  - SubtractPlayers
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

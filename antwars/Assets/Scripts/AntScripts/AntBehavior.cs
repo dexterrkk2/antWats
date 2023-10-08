@@ -6,8 +6,6 @@ public class AntBehavior : AntClass
 {
     public Camera antCam;
     public List<Color> colors;
-    public int initialPlayerClan;
-    public int playerClan;
     private PlayerController player;
     public float maxDistance;
     public float moveSpeed;
@@ -25,18 +23,6 @@ public class AntBehavior : AntClass
         if (selected)
         {
             Move(MousePosition.mousePosition, player.mouse.playerClan, maxDistance, moveSpeed);
-        }
-    }
-    public void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("collide");
-        if (collision.collider.tag == "Ant")
-        {
-            AntBehavior ant=collision.collider.GetComponent<AntBehavior>();
-            if (photonView.OwnerActorNr != ant.photonView.OwnerActorNr)
-            {
-                ant.TakeDamage(damage);
-            }
         }
     }
 }

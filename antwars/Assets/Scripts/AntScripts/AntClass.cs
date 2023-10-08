@@ -11,6 +11,7 @@ public class AntClass : MonoBehaviourPunCallbacks
     public bool secondClick = false;
     public int _playerClan;
     public int hp;
+    public int damageRadius = 4;
     [PunRPC]
     public void AssignType(int playerClan)
     {
@@ -45,6 +46,7 @@ public class AntClass : MonoBehaviourPunCallbacks
                         StartCoroutine(MoveDuration(transform.position, targetSquare, time));
                         selected = false;
                         secondClick = false;
+                        GameManager.instance.AntKillScript();
                     }
                     else
                     {
@@ -62,5 +64,11 @@ public class AntClass : MonoBehaviourPunCallbacks
             transform.position = Vector3.Lerp(beginPos, endPos, t);
             yield return null;
         }
+    }
+    
+    [PunRPC]
+    public void Die()
+    {
+        gameObject.SetActive(false);
     }
 }
