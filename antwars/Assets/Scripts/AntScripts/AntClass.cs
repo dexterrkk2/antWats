@@ -46,7 +46,7 @@ public class AntClass : MonoBehaviourPunCallbacks
                         StartCoroutine(MoveDuration(transform.position, targetSquare, time));
                         selected = false;
                         secondClick = false;
-                        GameManager.instance.AntKillScript();
+                        //GameManager.instance.AntKillScript();
                     }
                     else
                     {

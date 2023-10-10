@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool gameEnded = false; // has the game ended?
     [Header("Players")]
     public string playerPrefabLocation; // path in Resources folder to the Player prefab
-    public Transform[] spawnPoints; // array of all available spawn points
+    public Transform[] BasePoints; // array of all available spawn points
     public List<PlayerController> players; // array of all the players
     private int playersInGame; // number of players in the game
     public int count;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     void SpawnPlayer()
     {
         // instantiate the player across the network
-        GameObject playerObj = PhotonNetwork.Instantiate(playerPrefabLocation, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
+        GameObject playerObj = PhotonNetwork.Instantiate(playerPrefabLocation, BasePoints[Random.Range(0, BasePoints.Length)].position, Quaternion.identity);
         // get the player script
         PlayerController playerScript = playerObj.GetComponent<PlayerController>();
         playerScript.photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
@@ -71,11 +71,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void antSpawner()
     {
-        if (count >= spawnPoints.Length-1)
+        if (count >= BasePoints.Length)
         {
             count = 0;
         }
-        PhotonNetwork.Instantiate(antPrefab, spawnPoints[count].position, Quaternion.identity);
+        PhotonNetwork.Instantiate(antPrefab, BasePoints[count].position, Quaternion.identity);
         count++;
     }
     public PlayerController GetPlayer(int playerId)
@@ -90,21 +90,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         for (int i=0; i< ants.Count; i++)
         {
-            for (int j = 0; j < ants.Count; j++)
+            if (i> ants.Count-1)
             {
-                KillAnts(i,j);
+                KillAnts(i, i + 1);
+            }
+            else
+            {
+                KillAnts(i, 0);
             }
         }
     }
     // Update is called once per frame
     void Update()
     {
+        AntKillScript();
     }
     public void UpdateAnts()
     {
         ants.Clear();
         AntBehavior[] temp = (AntBehavior[]) FindObjectsOfType(typeof(AntBehavior));
-        for (int i = 0; i < temp.Length - 1; i++)
+        for (int i = 0; i < temp.Length; i++)
         {
             ants.Add(temp[i]);
         }
