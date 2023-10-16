@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public bool hasLost;
     public TextMeshProUGUI resouceText;
     public List<AntBehavior> soldiers;
+    public GameObject startPosition;
+    Base Base;
     public void OnEnable()
     {
         AntSpawner.onSpawn += ResourceUse;
@@ -36,10 +38,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
             gameObject.SetActive(false);
             playerCam.gameObject.SetActive(false);
         }
+        else
+        {
+            startPosition = GameManager.instance.BasePoints[id - 1].gameObject;
+            transform.position = startPosition.transform.position;
+        }
         mouse.playerClan = id - 1;
         resouce = 10;
     }
-    public void ResourceUse()
+    public void ResourceUse(int id)
     {
         resouce--;
         checkLoseGame();

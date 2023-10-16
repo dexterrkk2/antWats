@@ -5,7 +5,7 @@ using Photon.Pun;
 public class AntSpawner : MonoBehaviourPunCallbacks
 {
     public PlayerController player;
-    public delegate void SpawnEvent();
+    public delegate void SpawnEvent(int id);
     public static event SpawnEvent onSpawn;
     public GameManager gameManager;
     private void Start()
@@ -14,6 +14,6 @@ public class AntSpawner : MonoBehaviourPunCallbacks
     }
     public void AntEvent()
     {
-        onSpawn();
+        onSpawn(photonView.OwnerActorNr-1);
     }
 }

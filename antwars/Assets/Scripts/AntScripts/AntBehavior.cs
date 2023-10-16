@@ -22,7 +22,17 @@ public class AntBehavior : AntClass
     {
         if (selected)
         {
-            Move(MousePosition.mousePosition, player.mouse.playerClan, maxDistance, moveSpeed);
+            Move(player.mouse.mousePosition, player.mouse.playerClan, maxDistance, moveSpeed);
         }
+        if(hp <= 0)
+        {
+            photonView.RPC("Die", RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    public void Die()
+    {
+        gameObject.SetActive(false);
+        GameManager.instance.ants.Remove(this);
     }
 }

@@ -12,6 +12,8 @@ public class AntClass : MonoBehaviourPunCallbacks
     public int _playerClan;
     public int hp;
     public int damageRadius = 4;
+    public Vector3 futurePosition;
+    public int futureDamage;
     [PunRPC]
     public void AssignType(int playerClan)
     {
@@ -22,10 +24,14 @@ public class AntClass : MonoBehaviourPunCallbacks
     {
         selected = true;
     }
-    [PunRPC]
-    public void TakeDamage(int damage)
+    public void AssignDamage(int damage)
     {
-        hp -= damage;
+        futureDamage = damage;
+    }
+    [PunRPC]
+    public void TakeDamage()
+    {
+        hp -= futureDamage;
     }
     public void Move(Vector3 targetSquare, int playerClan, float maxDistance, float moveSpeed)
     {
@@ -46,7 +52,8 @@ public class AntClass : MonoBehaviourPunCallbacks
                         StartCoroutine(MoveDuration(transform.position, targetSquare, time));
                         selected = false;
                         secondClick = false;
-                        //GameManager.instance.AntKillScript();
+                        futurePosition = targetSquare;
+                        GameManager.instance.AntKillScript();
                     }
                     else
                     {
@@ -64,11 +71,5 @@ public class AntClass : MonoBehaviourPunCallbacks
             transform.position = Vector3.Lerp(beginPos, endPos, t);
             yield return null;
         }
-    }
-    
-    [PunRPC]
-    public void Die()
-    {
-        gameObject.SetActive(false);
     }
 }

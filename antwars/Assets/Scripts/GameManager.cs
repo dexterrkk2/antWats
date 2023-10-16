@@ -11,17 +11,19 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool gameEnded = false; // has the game ended?
     [Header("Players")]
     public string playerPrefabLocation; // path in Resources folder to the Player prefab
+    public string basePrefabLocation;
     public Transform[] BasePoints; // array of all available spawn points
     public List<PlayerController> players; // array of all the players
     private int playersInGame; // number of players in the game
-    public int count;
     public string antPrefab;
     // instance
     public static GameManager instance;
     public List<AntBehavior> ants;
+    public List<Base> bases;
     public int loseSceneNumber;
     public int winSceneNumber;
     public int alivePlayers;
+    public float damageTime;
     void Awake()
     {
         // instance
@@ -59,24 +61,30 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             SpawnPlayer();
         }
+        SpawnBase(playersInGame);
     }
     void SpawnPlayer()
     {
         // instantiate the player across the network
-        GameObject playerObj = PhotonNetwork.Instantiate(playerPrefabLocation, BasePoints[Random.Range(0, BasePoints.Length)].position, Quaternion.identity);
+        GameObject playerObj = PhotonNetwork.Instantiate(playerPrefabLocation, BasePoints[0].transform.position, Quaternion.identity);
         // get the player script
         PlayerController playerScript = playerObj.GetComponent<PlayerController>();
         playerScript.photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
     }
     [PunRPC]
-    public void antSpawner()
+    public void antSpawner(int id)
     {
-        if (count >= BasePoints.Length)
-        {
-            count = 0;
-        }
-        PhotonNetwork.Instantiate(antPrefab, BasePoints[count].position, Quaternion.identity);
-        count++;
+        PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position, Quaternion.identity);
+    }
+    [PunRPC]
+    public void SpawnBase(int num)
+    {
+        PhotonNetwork.Instantiate(basePrefabLocation, BasePoints[num-1].position, Quaternion.identity);
+        UpdateBases();
+    }
+    public void UpdateBases()
+    {
+       Base[] Base = FindObjectsOfType<Base>();
     }
     public PlayerController GetPlayer(int playerId)
     {
@@ -100,12 +108,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        AntKillScript();
-    }
-    public void UpdateAnts()
+    public void UpdateAnts(int id)
     {
         ants.Clear();
         AntBehavior[] temp = (AntBehavior[]) FindObjectsOfType(typeof(AntBehavior));
@@ -114,31 +117,24 @@ public class GameManager : MonoBehaviourPunCallbacks
             ants.Add(temp[i]);
         }
     }
+    
     public void KillAnts(int var1, int var2)
     {
-        float distance;
         AntBehavior ant1 = ants[var1];
         AntBehavior ant2 = ants[var2];
         if (ant1._playerClan != ant2._playerClan)
         {
-            distance = (ant1.transform.position - ant2.transform.position).sqrMagnitude;
-            if (ant1.damageRadius >= distance)
+            float distance1 = (ant1.futurePosition - ant2.transform.position).sqrMagnitude;
+            float distance2 = (ant1.transform.position - ant2.futurePosition).sqrMagnitude;
+            if (ant1.damageRadius >= distance1)
             {
-                ant2.TakeDamage(ant1.damage);
-                if (ant2.hp <=0)
-                {
-                    ants.Remove(ant2);
-                    ant2.photonView.RPC("Die", RpcTarget.All);
-                }
+                ant2.AssignDamage(ant1.damage);
+                ant2.Invoke("TakeDamage", damageTime);
             }
-            if (ant2.damageRadius >= distance)
+            if (ant2.damageRadius >= distance2)
             {
-                ant1.TakeDamage(ant2.damage);
-                if (ant1.hp <= 0)
-                {
-                    ants.Remove(ant1);
-                    ant1.photonView.RPC("Die", RpcTarget.All);
-                }
+                ant1.AssignDamage(ant2.damage);
+                ant1.Invoke("TakeDamage", damageTime);
             }
         }
     }

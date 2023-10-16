@@ -6,9 +6,10 @@ public class CameraMovement : MonoBehaviour
 {
     public Camera mainCamera;
     public float zoom;
-    float minFov = 15f;
-    float maxFov= 90f;
+    public float minFov = 15f;
+    public float maxFov= 90f;
     float sensitivity = 10f;
+    public PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class CameraMovement : MonoBehaviour
         float fov = mainCamera.fieldOfView;
         if (Input.GetButtonDown("Fire2"))
         {
-            transform.position = new Vector3(MousePosition.mousePosition.x, transform.position.y, MousePosition.mousePosition.z);
+            transform.position = new Vector3(player.mouse.mousePosition.x, transform.position.y, player.mouse.mousePosition.z);
         }
         fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
         fov = Mathf.Clamp(fov, minFov, maxFov);

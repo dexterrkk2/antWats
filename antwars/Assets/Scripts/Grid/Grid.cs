@@ -9,6 +9,7 @@ public class Grid : MonoBehaviour
     public Vector3 offset;
     public Transform gridParent;
     public List<Color> colors;
+    public List<Transform> Corners;
     int colorCounter;
     private void Start()
     {
@@ -25,10 +26,14 @@ public class Grid : MonoBehaviour
                     colorCounter=1;
                 }
                 Tile spawnedTile = Instantiate(tilePrefab, gridParent);
-                spawnedTile.transform.position = new Vector3(x - offset.x, 1 - scale * 2, z - offset.z);
+                spawnedTile.transform.position = new Vector3(x, 1 - scale * 2, z);
                 spawnedTile.TIleColor(colors[colorCounter]);
                 colorCounter=0;
             }
         }
+        Corners[0].position = new Vector3(-offset.x, 0, +offset.z);
+        Corners[1].position = new Vector3(width * scale - offset.x, 0, +offset.z);
+        Corners[2].position = new Vector3(+offset.x, 0, height * scale - offset.z);
+        Corners[3].position = new Vector3(width*scale-offset.x, 0, height * scale - offset.z);
     }
 }
