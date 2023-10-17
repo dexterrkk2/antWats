@@ -16,8 +16,8 @@ public class Base : MonoBehaviourPunCallbacks
     [PunRPC]
     void AssignBase()
     {
-        id = photonView.OwnerActorNr;
-        colorChange.color = colors[id-1];
+        //id = photonView.OwnerActorNr-1;
+        colorChange.color = colors[id];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
     }
 }

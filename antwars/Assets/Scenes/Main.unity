@@ -470,12 +470,16 @@ MonoBehaviour:
   - {fileID: 1808551361}
   players: []
   antPrefab: Ants
+  resourcePrefab: Food
   ants: []
   bases: []
+  resources: []
   loseSceneNumber: 2
   winSceneNumber: 3
   alivePlayers: 0
   damageTime: 2
+  grid: {fileID: 1514615369}
+  resourceNum: 10
 --- !u!114 &1342368325
 MonoBehaviour:
   m_ObjectHideFlags: 0
