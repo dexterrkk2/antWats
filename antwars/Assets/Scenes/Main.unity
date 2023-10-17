@@ -471,6 +471,7 @@ MonoBehaviour:
   players: []
   antPrefab: Ants
   ants: []
+  bases: []
   loseSceneNumber: 2
   winSceneNumber: 3
   alivePlayers: 0
@@ -526,8 +527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb339e868d20c6c46a373c94b2a99e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 50
-  height: 50
+  width: 100
+  height: 100
   scale: 5
   tilePrefab: {fileID: 6052195570894484853, guid: 9f86179c594ca6c4aa1a891ded0acf4a, type: 3}
   offset: {x: 40, y: 0, z: 40}

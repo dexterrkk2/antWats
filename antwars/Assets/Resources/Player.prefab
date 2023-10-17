@@ -237,7 +237,7 @@ MonoBehaviour:
   mainCamera: {fileID: 2633232063909555285}
   zoom: 1
   minFov: 15
-  maxFov: 120
+  maxFov: 90
   player: {fileID: 6160012335028575400}
 --- !u!1 &6160012335028575401
 GameObject:
@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 2633232063909555285}
-  mousePosition: {x: 0, y: 0, z: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 8

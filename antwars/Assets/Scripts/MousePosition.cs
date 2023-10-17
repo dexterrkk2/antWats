@@ -5,7 +5,7 @@ using UnityEngine;
 public class MousePosition : MonoBehaviour
 {
     public Camera playerCam;
-    public Vector3 mousePosition;
+    public static Vector3 mousePosition;
     public LayerMask layerMask;
     public int playerClan;
     private void Update()

@@ -45,15 +45,16 @@ public class AntClass : MonoBehaviourPunCallbacks
                     {
                         if ((targetSquare - transform.position).magnitude > maxDistance)
                         {
-                            targetSquare.x = Mathf.Clamp(targetSquare.x, transform.position.x - maxDistance, transform.position.x + maxDistance);
-                            targetSquare.z = Mathf.Clamp(targetSquare.z, transform.position.x - maxDistance, transform.position.z + maxDistance);
+                            Vector3 moveDirection = (targetSquare - transform.position).normalized;
+                            targetSquare = transform.position + moveDirection * maxDistance;
                         }
-                        float time = (targetSquare.magnitude/ moveSpeed/10);
+                        float time = (targetSquare-transform.position).magnitude/ moveSpeed/5;
                         StartCoroutine(MoveDuration(transform.position, targetSquare, time));
                         selected = false;
                         secondClick = false;
                         futurePosition = targetSquare;
-                        GameManager.instance.AntKillScript();
+                        GameManager.instance.damageTime = time;
+                        GameManager.instance.AntCheck();
                     }
                     else
                     {

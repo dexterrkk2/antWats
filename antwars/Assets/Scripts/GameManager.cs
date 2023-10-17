@@ -85,6 +85,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void UpdateBases()
     {
        Base[] Base = FindObjectsOfType<Base>();
+        for (int i=0; i< Base.Length; i++)
+        {
+            bases.Add(Base[i]);
+        }
     }
     public PlayerController GetPlayer(int playerId)
     {
@@ -94,7 +98,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         return players.First(x => x.gameObject == playerObject);
     }
-    public void AntKillScript()
+    public void AntCheck()
     {
         for (int i=0; i< ants.Count; i++)
         {
@@ -106,6 +110,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 KillAnts(i, 0);
             }
+            BaseCheck(ants[i]);
         }
     }
     public void UpdateAnts(int id)
@@ -117,7 +122,23 @@ public class GameManager : MonoBehaviourPunCallbacks
             ants.Add(temp[i]);
         }
     }
-    
+    public void BaseCheck(AntBehavior ant)
+    {
+        for (int i = 0; i < bases.Count; i++) 
+        {
+            float distance = (ant.futurePosition - bases[i].transform.position).sqrMagnitude;
+            Debug.Log(ant.damageRadius >= distance);
+            if (ant.damageRadius >= distance)
+            {
+                Debug.Log(ant._playerClan);
+                Debug.Log(bases[i].id);
+                if (ant._playerClan != bases[i].id)
+                {
+                    LoseGame(players[bases[i].id - 1]);
+                }
+            }
+        }
+    }
     public void KillAnts(int var1, int var2)
     {
         AntBehavior ant1 = ants[var1];

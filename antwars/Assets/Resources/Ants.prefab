@@ -209,7 +209,7 @@ MonoBehaviour:
   secondClick: 0
   _playerClan: 0
   hp: 10
-  damageRadius: 1000
+  damageRadius: 100
   futurePosition: {x: 0, y: 0, z: 0}
   futureDamage: 0
   antCam: {fileID: 5515362876606701709}
@@ -218,7 +218,7 @@ MonoBehaviour:
   - {r: 0.8679245, g: 0.19241722, b: 0.19241722, a: 0}
   - {r: 0.8962264, g: 0.17332679, b: 0.7276965, a: 0}
   - {r: 0.23736107, g: 0.8962264, b: 0.054957304, a: 0}
-  maxDistance: 30
+  maxDistance: 60
   moveSpeed: 10
   colorChange: {fileID: 6460554684579879487}
 --- !u!114 &2405144591685994987

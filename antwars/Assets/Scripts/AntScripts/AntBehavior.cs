@@ -22,7 +22,7 @@ public class AntBehavior : AntClass
     {
         if (selected)
         {
-            Move(player.mouse.mousePosition, player.mouse.playerClan, maxDistance, moveSpeed);
+            Move(MousePosition.mousePosition, player.mouse.playerClan, maxDistance, moveSpeed);
         }
         if(hp <= 0)
         {

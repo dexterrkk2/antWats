@@ -49,13 +49,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void ResourceUse(int id)
     {
         resouce--;
-        checkLoseGame();
+        Starvation();
     }
-    public void checkLoseGame()
+    public void Starvation()
     {
         if (resouce == 0)
         {
-            GameManager.instance.LoseGame(this);
+
         }  
     }
     public void Update()

@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
         float fov = mainCamera.fieldOfView;
         if (Input.GetButtonDown("Fire2"))
         {
-            transform.position = new Vector3(player.mouse.mousePosition.x, transform.position.y, player.mouse.mousePosition.z);
+            transform.position = new Vector3(MousePosition.mousePosition.x, transform.position.y, MousePosition.mousePosition.z);
         }
         fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
         fov = Mathf.Clamp(fov, minFov, maxFov);
