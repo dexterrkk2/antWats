@@ -31,7 +31,7 @@ public class Grid : MonoBehaviour
                 colorCounter=0;
             }
         }
-        Corners[0].position = new Vector3(-offset.x, -3, +offset.z);
+        Corners[0].position = new Vector3(+offset.x, -3, +offset.z);
         Corners[1].position = new Vector3(width * scale - offset.x, -3, +offset.z);
         Corners[2].position = new Vector3(+offset.x, -3, height * scale - offset.z);
         Corners[3].position = new Vector3(width*scale-offset.x, -3, height * scale - offset.z);

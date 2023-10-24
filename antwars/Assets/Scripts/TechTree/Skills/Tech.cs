@@ -6,6 +6,6 @@ public class Tech : Skill
 {
     public override void Upgrade()
     {
-        Debug.Log("Tech");
+        player.FoodScaleFactor++;
     }
 }

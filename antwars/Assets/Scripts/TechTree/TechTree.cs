@@ -21,7 +21,6 @@ public class TechTree : MonoBehaviour
         {
             skillTree[i].player = player;
             Vector3 position = new Vector3(offset, 500, 0);
-            
             if(i == 0)
             {
                 skillTree[i].position = position;
@@ -44,7 +43,7 @@ public class TechTree : MonoBehaviour
         TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
         if (buttonText != null)
         {
-            buttonText.text = skill.name;
+            buttonText.text = skill.name + " " + skill.cost;
         }
         button.transform.SetParent(transform);
     }

@@ -14,6 +14,9 @@ public class AntSpawner : MonoBehaviourPunCallbacks
     }
     public void AntEvent()
     {
-        onSpawn(photonView.OwnerActorNr-1);
+        if (player.resource > 0)
+        {
+            onSpawn(photonView.OwnerActorNr - 1);
+        }
     }
 }

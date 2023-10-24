@@ -8,6 +8,7 @@ public abstract class Skill: MonoBehaviour
     public Skill right;
     public bool previousPaid;
     public bool upgraded;
+    public bool activated = false;
     public int cost;
     public string name;
     public string description;
@@ -17,7 +18,7 @@ public abstract class Skill: MonoBehaviour
     public abstract void Upgrade();
     public void ButtonClick()
     {
-        if(previousPaid && player.resource >= cost)
+        if(previousPaid && player.resource >= cost && activated == false)
         {
             if (left != null)
             {
@@ -29,6 +30,7 @@ public abstract class Skill: MonoBehaviour
             }
             Upgrade();
             player.resource -= cost;
+            activated = true;
         }
     }
 }

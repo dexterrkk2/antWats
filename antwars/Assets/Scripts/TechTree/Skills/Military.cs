@@ -6,6 +6,6 @@ public class Military : Skill
 {
     public override void Upgrade()
     {
-        Debug.Log("Military");
+        player.foodUseFactor++;
     }
 }

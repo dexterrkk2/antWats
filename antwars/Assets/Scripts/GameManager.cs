@@ -98,8 +98,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         GameObject antObject =PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position, Quaternion.identity);
         AntBehavior ant = antObject.GetComponent<AntBehavior>();
-        Debug.Log("playerid" + id);
-        Debug.Log("ant id" + ant._playerClan);
+        //Debug.Log("playerid" + id);
+        //Debug.Log("ant id" + ant._playerClan);
         if (id == ant._playerClan)
         {
             players[id].soldiers.Add(ant);
@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviourPunCallbacks
           
             if (ant.damageRadius >= distance)
             {
-                players[ant._playerClan].resource++;
+                players[ant._playerClan].resource+= 1* players[ant._playerClan].FoodScaleFactor;
                 resources[i].photonView.RPC("Die", RpcTarget.All);
                 resources.RemoveAt(i);
             }

@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class CultureSkill : Skill
 {
+    public float resourceTime;
     public override void Upgrade()
     {
-        Debug.Log("Culture tree");
+        InvokeRepeating("PassiveBuff", 0f, resourceTime);
+    }
+    public void PassiveBuff()
+    {
+        player.resource++;
     }
 }
