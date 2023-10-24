@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public MousePosition mouse;
     public Canvas UI;
     public Camera playerCam;
-    public int resouce;
+    public int resource;
     public bool hasLost;
     public TextMeshProUGUI resouceText;
     public List<AntBehavior> soldiers;
@@ -44,22 +44,22 @@ public class PlayerController : MonoBehaviourPunCallbacks
             transform.position = startPosition.transform.position;
         }
         mouse.playerClan = id - 1;
-        resouce = 10;
+        resource = 10;
     }
     public void ResourceUse(int id)
     {
-        resouce--;
+        resource--;
         Starvation();
     }
     public void Starvation()
     {
-        if (resouce == 0)
+        if (resource == 0)
         {
 
         }  
     }
     public void Update()
     {
-        resouceText.text = "Food Left: " + resouce;
+        resouceText.text = "Food Left: " + resource;
     }
 }

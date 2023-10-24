@@ -96,7 +96,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void antSpawner(int id)
     {
-        PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position, Quaternion.identity);
+        GameObject antObject =PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position, Quaternion.identity);
+        AntBehavior ant = antObject.GetComponent<AntBehavior>();
+        Debug.Log("playerid" + id);
+        Debug.Log("ant id" + ant._playerClan);
+        if (id == ant._playerClan)
+        {
+            players[id].soldiers.Add(ant);
+        }
     }
     [PunRPC]
     public Base SpawnBase(int num)
@@ -166,12 +173,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         for (int i = 0; i < bases.Count; i++) 
         {
             float distance = (ant.futurePosition - bases[i].transform.position).sqrMagnitude;
-            Debug.Log("ant radius " + ant.damageRadius);
-            Debug.Log("distance " + distance);
+            //Debug.Log("ant radius " + ant.damageRadius);
+            //Debug.Log("distance " + distance);
             if (ant.damageRadius >= distance)
             {
-                Debug.Log("Ant id " + ant._playerClan);
-                Debug.Log("Base id " + bases[i].id);
+                //Debug.Log("Ant id " + ant._playerClan);
+                //Debug.Log("Base id " + bases[i].id);
                 if (ant._playerClan != bases[i].id)
                 {
                     LoseGame(players[bases[i].id]);
@@ -187,7 +194,7 @@ public class GameManager : MonoBehaviourPunCallbacks
           
             if (ant.damageRadius >= distance)
             {
-                players[ant._playerClan].resouce++;
+                players[ant._playerClan].resource++;
                 resources[i].photonView.RPC("Die", RpcTarget.All);
                 resources.RemoveAt(i);
             }
