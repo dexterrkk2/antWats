@@ -212,6 +212,7 @@ MonoBehaviour:
   damageRadius: 100
   futurePosition: {x: 0, y: 0, z: 0}
   futureDamage: 0
+  combatMod: 0
   antCam: {fileID: 5515362876606701709}
   colors:
   - {r: 0.11372546, g: 0.15897356, b: 0.8980392, a: 0}

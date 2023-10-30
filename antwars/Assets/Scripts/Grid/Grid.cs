@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Grid : MonoBehaviour
+using Photon.Pun;
+public class Grid : MonoBehaviourPunCallbacks
 {
     public int width, height, scale;
     public Tile tilePrefab;
@@ -13,8 +13,9 @@ public class Grid : MonoBehaviour
     int colorCounter;
     private void Start()
     {
-        GenerateGrid();
+        //GenerateGrid();
     }
+    [PunRPC]
     public void GenerateGrid()
     {
         for (int x = 0; x < width*scale; x+=(1*scale))
@@ -29,6 +30,9 @@ public class Grid : MonoBehaviour
                 spawnedTile.transform.position = new Vector3(x, 1 - scale * 2, z);
                 spawnedTile.TIleColor(colors[colorCounter]);
                 colorCounter=0;
+                GameManager.instance.tiles[x/scale, z/scale] = spawnedTile;
+                spawnedTile.name += x/scale + " ";
+                spawnedTile.name += z/scale;
             }
         }
         Corners[0].position = new Vector3(+offset.x, -3, +offset.z);

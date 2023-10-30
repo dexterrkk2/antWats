@@ -6,6 +6,9 @@ public class Tile : MonoBehaviour
 {
     
     public MeshRenderer mat;
+    public AntClass ant;
+    public GameObject resource;
+    public Base Base;
     public void TIleColor(Color newColor)
     {
         mat.material.color = newColor;

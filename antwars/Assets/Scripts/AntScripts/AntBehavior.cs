@@ -23,8 +23,9 @@ public class AntBehavior : AntClass
         if (selected)
         {
             Move(MousePosition.mousePosition, player.mouse.playerClan, maxDistance, moveSpeed);
+            GameManager.instance.AntCheck(this);
         }
-        if(hp <= 0)
+        if (hp <= 0)
         {
             photonView.RPC("Die", RpcTarget.All);
         }

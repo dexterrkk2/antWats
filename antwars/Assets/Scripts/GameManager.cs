@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public float damageTime;
     public Grid grid;
     public int resourceNum;
+    public Tile[,] tiles;
     void Awake()
     {
         // instance
@@ -36,12 +37,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void OnEnable()
     {
         AntSpawner.onSpawn += antSpawner;
-        AntSpawner.onSpawn += UpdateAnts;
     }
     private void OnDisable ()
     {
         AntSpawner.onSpawn -= antSpawner;
-        AntSpawner.onSpawn -= UpdateAnts;
     }
     // Start is called before the first frame update
     void Start()
@@ -52,16 +51,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             players.Add(temp[i]);
             alivePlayers++;
         }
-        if (grid != null)
-        {
-            grid.GenerateGrid();
-        }
-        if (photonView != null)
-        {
-            photonView.RPC("ImInGame", RpcTarget.All);
-        }
+        tiles = new Tile[grid.height, grid.width];
         if (photonView.IsMine)
         {
+            grid.photonView.RPC("GenerateGrid", RpcTarget.All);
             for (int i = 0; i < resourceNum; i++)
             {
                 ResourceSpawn();
@@ -73,7 +66,11 @@ public class GameManager : MonoBehaviourPunCallbacks
                 bases.Add(playerBase);
             }
         }
-        UpdateResources();
+        if (photonView != null)
+        {
+            photonView.RPC("ImInGame", RpcTarget.All);
+        }
+        photonView.RPC("UpdateResources",RpcTarget.All);
     }
     [PunRPC]
     void ImInGame()
@@ -98,10 +95,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         GameObject antObject =PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position, Quaternion.identity);
         AntBehavior ant = antObject.GetComponent<AntBehavior>();
+       
         //Debug.Log("playerid" + id);
         //Debug.Log("ant id" + ant._playerClan);
         if (id == ant._playerClan)
         {
+            ant.name += ant._playerClan;
             players[id].soldiers.Add(ant);
         }
     }
@@ -109,15 +108,20 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Base SpawnBase(int num)
     {
         GameObject Base = PhotonNetwork.Instantiate(basePrefabLocation, BasePoints[num].position, Quaternion.identity);
+        tiles[((int)(BasePoints[num].position.x/grid.scale)), ((int)(BasePoints[num].position.z/grid.scale))].Base = Base.GetComponent<Base>();
         return Base.GetComponent<Base>();
     }
     [PunRPC]
     public void ResourceSpawn()
     {
-        int randomX = Random.Range(0, grid.width * grid.scale);
-        int randomZ = Random.Range(0, grid.height * grid.scale);
-        Vector3 randomPos = new Vector3(randomX, -3, randomZ);
-        PhotonNetwork.Instantiate(resourcePrefab, randomPos, Quaternion.identity);
+        int randomX = Random.Range(0, grid.width);
+        int randomZ = Random.Range(0, grid.height);
+        Vector3 randomPos = new Vector3(randomX * grid.scale, -4, randomZ * grid.scale);
+        GameObject  rescource =PhotonNetwork.Instantiate(resourcePrefab, randomPos, Quaternion.identity);
+        if (rescource != null)
+        {
+            tiles[randomX, randomZ].resource = rescource;
+        }
     }
     public PlayerController GetPlayer(int playerId)
     {
@@ -127,26 +131,66 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         return players.First(x => x.gameObject == playerObject);
     }
-    public void AntCheck()
+    public void AntCheck(AntBehavior ant)
     {
-        for (int i=0; i< ants.Count; i++)
+        int pastx = (int)Mathf.Round(ant.transform.position.x / grid.scale);
+        int pastz = (int)Mathf.Round(ant.transform.position.z / grid.scale);
+        int futurex = (int)Mathf.Round(ant.futurePosition.x / grid.scale);
+        int futurez = (int)Mathf.Round(ant.futurePosition.z / grid.scale);
+        //Debug.Log("Tile we want " +futurex +" " + futurez);
+        //Debug.Log("ally here" + tiles[futurex, futurez].ally);
+        if (tiles[futurex, futurez].ant != null)
         {
-            if (i> ants.Count-1)
+            Debug.Log(tiles[futurex, futurez].name + " ant id:" + tiles[futurex, futurez].ant._playerClan);
+        }
+        if (tiles[futurex, futurez].resource != null)
+        {
+            players[ant._playerClan].resource += 1 * players[ant._playerClan].FoodScaleFactor;
+            tiles[futurex, futurez].resource.SetActive(false);
+            tiles[futurex, futurez].resource = null;
+        }
+        if (tiles[futurex, futurez].ant != null && tiles[futurex, futurez].ant._playerClan != ant._playerClan)
+        {
+            Debug.Log("enter combat");
+            Combat(tiles[futurex, futurez].ant, ant);
+        }
+        tiles[pastx, pastz].ant = null;
+        tiles[futurex, futurez].ant = ant;
+        if (tiles[futurex, futurez].Base != null && tiles[futurex, futurez].Base.id != ant._playerClan)
+        {
+            LoseGame(players[tiles[futurex, futurez].Base.id]);
+        }
+    }
+    public void Combat(AntClass ant1, AntClass ant2)
+    {
+        while(ant1.hp> 0 && ant2.hp > 0)
+        {
+            int damageRoll1 = Random.Range(0,6) + Random.Range(0, 6) + Random.Range(0, 6) + ant1.combatMod;
+            int damageRoll2 = Random.Range(0, 6) + Random.Range(0, 6) + Random.Range(0, 6) + ant2.combatMod;
+            if(damageRoll1 > damageRoll2)
             {
-                KillAnts(i, i + 1);
+                ant2.futureDamage = ant1.damage;
+                ant2.photonView.RPC("TakeDamage", RpcTarget.All);
             }
             else
             {
-                KillAnts(i, 0);
+                ant1.futureDamage = ant2.damage;
+                ant1.photonView.RPC("TakeDamage", RpcTarget.All);
             }
-            BaseCheck(ants[i]);
-            ResourceCheck(ants[i]);
+        }
+        if (ant1.hp <= 0)
+        {
+            Debug.Log("ant died: " + ant1);
+        }
+        if (ant2.hp <= 0)
+        {
+            Debug.Log("ant died: " + ant2);
         }
     }
-    public void UpdateAnts(int id)
+    /*public void UpdateAnts(int id)
     {
         ants.Clear();
-        AntBehavior[] temp = (AntBehavior[]) FindObjectsOfType(typeof(AntBehavior));
+        AntBehavior[] temp = (AntBehavior[])FindObjectsOfType(typeof(AntBehavior));
         for (int i = 0; i < temp.Length; i++)
         {
             ants.Add(temp[i]);
@@ -159,67 +203,70 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             bases.Add(Base[i]);
         }
-    }
+    }*/
+    [PunRPC]
     public void UpdateResources()
     {
         Resource[] resource = FindObjectsOfType<Resource>();
         for (int i = 0; i < resource.Length; i++)
         {
-            resources.Add(resource[i]);
+            int positionx = Mathf.RoundToInt(resource[i].transform.position.x/grid.scale);
+            int positionz = Mathf.RoundToInt(resource[i].transform.position.z/grid.scale);
+            tiles[positionx, positionz].resource = resource[i].gameObject;
         }
     }
-    public void BaseCheck(AntBehavior ant)
-    {
-        for (int i = 0; i < bases.Count; i++) 
-        {
-            float distance = (ant.futurePosition - bases[i].transform.position).sqrMagnitude;
-            //Debug.Log("ant radius " + ant.damageRadius);
-            //Debug.Log("distance " + distance);
-            if (ant.damageRadius >= distance)
-            {
-                //Debug.Log("Ant id " + ant._playerClan);
-                //Debug.Log("Base id " + bases[i].id);
-                if (ant._playerClan != bases[i].id)
-                {
-                    LoseGame(players[bases[i].id]);
-                }
-            }
-        }
-    }
-    public void ResourceCheck(AntBehavior ant)
-    {
-        for (int i = 0; i < resources.Count; i++)
-        {
-            float distance = (ant.futurePosition - resources[i].transform.position).sqrMagnitude;
-          
-            if (ant.damageRadius >= distance)
-            {
-                players[ant._playerClan].resource+= 1* players[ant._playerClan].FoodScaleFactor;
-                resources[i].photonView.RPC("Die", RpcTarget.All);
-                resources.RemoveAt(i);
-            }
-        }
-    }
-    public void KillAnts(int var1, int var2)
-    {
-        AntBehavior ant1 = ants[var1];
-        AntBehavior ant2 = ants[var2];
-        if (ant1._playerClan != ant2._playerClan)
-        {
-            float distance1 = (ant1.futurePosition - ant2.transform.position).sqrMagnitude;
-            float distance2 = (ant1.transform.position - ant2.futurePosition).sqrMagnitude;
-            if (ant1.damageRadius >= distance1)
-            {
-                ant2.AssignDamage(ant1.damage);
-                ant2.Invoke("TakeDamage", damageTime);
-            }
-            if (ant2.damageRadius >= distance2)
-            {
-                ant1.AssignDamage(ant2.damage);
-                ant1.Invoke("TakeDamage", damageTime);
-            }
-        }
-    }
+    /*   public void BaseCheck(AntBehavior ant)
+       {
+           for (int i = 0; i < bases.Count; i++) 
+           {
+               float distance = (ant.futurePosition - bases[i].transform.position).sqrMagnitude;
+               //Debug.Log("ant radius " + ant.damageRadius);
+               //Debug.Log("distance " + distance);
+               if (ant.damageRadius >= distance)
+               {
+                   //Debug.Log("Ant id " + ant._playerClan);
+                   //Debug.Log("Base id " + bases[i].id);
+                   if (ant._playerClan != bases[i].id)
+                   {
+                       LoseGame(players[bases[i].id]);
+                   }
+               }
+           }
+       }
+       public void ResourceCheck(AntBehavior ant)
+       {
+           for (int i = 0; i < resources.Count; i++)
+           {
+               float distance = (ant.futurePosition - resources[i].transform.position).sqrMagnitude;
+
+               if (ant.damageRadius >= distance)
+               {
+                   players[ant._playerClan].resource+= 1* players[ant._playerClan].FoodScaleFactor;
+                   resources[i].photonView.RPC("Die", RpcTarget.All);
+                   resources.RemoveAt(i);
+               }
+           }
+       }
+       public void KillAnts(int var1, int var2)
+       {
+           AntBehavior ant1 = ants[var1];
+           AntBehavior ant2 = ants[var2];
+           if (ant1._playerClan != ant2._playerClan)
+           {
+               float distance1 = (ant1.futurePosition - ant2.transform.position).sqrMagnitude;
+               float distance2 = (ant1.transform.position - ant2.futurePosition).sqrMagnitude;
+               if (ant1.damageRadius >= distance1)
+               {
+                   ant2.AssignDamage(ant1.damage);
+                   ant2.Invoke("TakeDamage", damageTime);
+               }
+               if (ant2.damageRadius >= distance2)
+               {
+                   ant1.AssignDamage(ant2.damage);
+                   ant1.Invoke("TakeDamage", damageTime);
+               }
+           }
+       }*/
     [PunRPC]
     public void LoseGame(PlayerController playerController)
     {

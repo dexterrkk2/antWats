@@ -14,6 +14,7 @@ public class AntClass : MonoBehaviourPunCallbacks
     public int damageRadius = 4;
     public Vector3 futurePosition;
     public int futureDamage;
+    public int combatMod;
     [PunRPC]
     public void AssignType(int playerClan)
     {
@@ -54,7 +55,6 @@ public class AntClass : MonoBehaviourPunCallbacks
                         secondClick = false;
                         futurePosition = targetSquare;
                         GameManager.instance.damageTime = time;
-                        GameManager.instance.AntCheck();
                     }
                     else
                     {
