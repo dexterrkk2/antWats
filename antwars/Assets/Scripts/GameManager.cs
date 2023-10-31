@@ -139,10 +139,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         int futurez = (int)Mathf.Round(ant.futurePosition.z / grid.scale);
         //Debug.Log("Tile we want " +futurex +" " + futurez);
         //Debug.Log("ally here" + tiles[futurex, futurez].ally);
-        if (tiles[futurex, futurez].ant != null)
+        /*if (tiles[futurex, futurez].ant != null)
         {
             Debug.Log(tiles[futurex, futurez].name + " ant id:" + tiles[futurex, futurez].ant._playerClan);
-        }
+        }*/
         if (tiles[futurex, futurez].resource != null)
         {
             players[ant._playerClan].resource += 1 * players[ant._playerClan].FoodScaleFactor;
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         if (tiles[futurex, futurez].ant != null && tiles[futurex, futurez].ant._playerClan != ant._playerClan)
         {
-            Debug.Log("enter combat");
+            //Debug.Log("enter combat");
             Combat(tiles[futurex, futurez].ant, ant);
         }
         tiles[pastx, pastz].ant = null;

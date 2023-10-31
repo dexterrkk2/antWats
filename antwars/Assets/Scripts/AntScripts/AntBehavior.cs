@@ -17,6 +17,7 @@ public class AntBehavior : AntClass
         AssignType(photonView.OwnerActorNr - 1); ;
         colorChange.color = colors[photonView.OwnerActorNr - 1];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
+        mesh = colorChange.meshRenderer;
     }
     public void Update()
     {

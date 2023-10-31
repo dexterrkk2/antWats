@@ -15,6 +15,7 @@ public class AntClass : MonoBehaviourPunCallbacks
     public Vector3 futurePosition;
     public int futureDamage;
     public int combatMod;
+    public MeshRenderer mesh;
     [PunRPC]
     public void AssignType(int playerClan)
     {
@@ -54,6 +55,7 @@ public class AntClass : MonoBehaviourPunCallbacks
                         selected = false;
                         secondClick = false;
                         futurePosition = targetSquare;
+                        transform.LookAt(futurePosition);
                         GameManager.instance.damageTime = time;
                     }
                     else
