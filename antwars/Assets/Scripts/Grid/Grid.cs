@@ -29,6 +29,7 @@ public class Grid : MonoBehaviourPunCallbacks
                 Tile spawnedTile = Instantiate(tilePrefab, gridParent);
                 spawnedTile.transform.position = new Vector3(x, 1 - scale * 2, z);
                 spawnedTile.TIleColor(colors[colorCounter]);
+                spawnedTile.transform.localScale = new Vector3(scale, scale, scale);
                 colorCounter=0;
                 GameManager.instance.tiles[x/scale, z/scale] = spawnedTile;
                 spawnedTile.name += x/scale + " ";
