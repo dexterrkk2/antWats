@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
             transform.position = startPosition.transform.position;
         }
         mouse.playerClan = id - 1;
-        resource = 10;
     }
     public void ResourceUse(int id)
     {

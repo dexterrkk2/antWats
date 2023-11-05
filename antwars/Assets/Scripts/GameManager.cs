@@ -95,12 +95,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         GameObject antObject =PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position, Quaternion.identity);
         AntBehavior ant = antObject.GetComponent<AntBehavior>();
-       
         //Debug.Log("playerid" + id);
         //Debug.Log("ant id" + ant._playerClan);
         if (id == ant._playerClan)
         {
-            ant.name += ant._playerClan;
+            ant.player = players[id];
             players[id].soldiers.Add(ant);
         }
     }

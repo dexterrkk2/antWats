@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8012942070962899437}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7212517, z: -0, w: -0.6926731}
   m_LocalPosition: {x: -1.46, y: 10.16, z: -4.96}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 515852408522991960}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 267.684, z: 0}
 --- !u!20 &5515362876606701709
 Camera:
@@ -47,17 +47,9 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -122,7 +114,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8630454653275693121}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
@@ -130,6 +121,7 @@ Transform:
   m_Children:
   - {fileID: 515852408522991960}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8873757184457114473
 MeshFilter:
@@ -189,17 +181,9 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8630454653275693121}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1692572531523433392
@@ -236,6 +220,7 @@ MonoBehaviour:
   - {r: 0.8679245, g: 0.19241722, b: 0.19241722, a: 0}
   - {r: 0.8962264, g: 0.17332679, b: 0.7276965, a: 0}
   - {r: 0.23736107, g: 0.8962264, b: 0.054957304, a: 0}
+  player: {fileID: 0}
   maxDistance: 60
   moveSpeed: 10
   colorChange: {fileID: 6460554684579879487}
@@ -315,22 +300,21 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8678318457025831375}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.63, y: -0.7342394, z: -0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.12632118, y: 0.12632118, z: 0.12632118}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9016032020462405111}
   - {fileID: 3694988579433963434}
   m_Father: {fileID: 2960833940534713436}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &8833203910358917660
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
     m_TransformParent: {fileID: 515852408522991960}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f664f86ff4c720748822be287c3fa839, type: 3}
@@ -394,9 +378,6 @@ PrefabInstance:
       value: soldier ant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f664f86ff4c720748822be287c3fa839, type: 3}
 --- !u!23 &5876485036892318939 stripped
 MeshRenderer:

@@ -5,12 +5,15 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     
-    public MeshRenderer mat;
+    public List<MeshRenderer> mats;
     public AntClass ant;
     public GameObject resource;
     public Base Base;
     public void TIleColor(Color newColor)
     {
-        mat.material.color = newColor;
+        for (int i = 0; i < mats.Count; i++)
+        {
+            mats[i].material.color = newColor;
+        }
     }
 }

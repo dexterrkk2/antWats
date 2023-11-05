@@ -6,13 +6,12 @@ public class AntBehavior : AntClass
 {
     public Camera antCam;
     public List<Color> colors;
-    private PlayerController player;
+    public PlayerController player;
     public float maxDistance;
     public float moveSpeed;
     public ColorChange colorChange;
     public void Start()
     {
-        player = FindObjectOfType<PlayerController>();
         antCam.gameObject.SetActive(false);
         AssignType(photonView.OwnerActorNr - 1); ;
         colorChange.color = colors[photonView.OwnerActorNr - 1];

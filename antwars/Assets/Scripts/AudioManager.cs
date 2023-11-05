@@ -9,12 +9,14 @@ public class AudioManager : MonoBehaviour
     public AudioMixer audioMixer;
     public List<AudioClip> audioClips;
     public AudioSource audioSource;
+    public float startingVolume;
     int currentclip;
     private void Start()
     {
         audioSource.clip = audioClips[0];
         audioSource.Play();
         currentclip++;
+        AudioListener.volume = startingVolume;
         Invoke("Increment", audioSource.clip.length);
     }
     public void SetVolume()
