@@ -9,7 +9,7 @@ public class Cyborgs : Skill
         for (int i = 0; i < player.soldiers.Count; i++)
         {
             player.FoodScaleFactor++;
-            player.soldiers[i].damageRadius *= 2;
+            player.soldiers[i].combatMod += 2;
         }
     }
 }

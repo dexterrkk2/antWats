@@ -10,7 +10,7 @@ public class BiggerAnts : Skill
         {
             player.soldiers[i].transform.localScale *= 2;
             player.FoodScaleFactor++;
-            player.soldiers[i].damageRadius *= 2;
+            player.soldiers[i].combatMod += 1;
         }
     }
 }

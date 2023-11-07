@@ -14,13 +14,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public Canvas UI;
     public Camera playerCam;
     public float resource;
-    public bool hasLost;
+    public bool hasLost = false;
     public TextMeshProUGUI resouceText;
     public List<AntBehavior> soldiers;
     public GameObject startPosition;
     Base Base;
     public float FoodScaleFactor =1;
     public float foodUseFactor = 1;
+    public TextMeshProUGUI playerText;
+    public List<Color> colors;
+    public List<string> colorNames;
     public void OnEnable()
     {
         AntSpawner.onSpawn += ResourceUse;
@@ -46,6 +49,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
             transform.position = startPosition.transform.position;
         }
         mouse.playerClan = id - 1;
+        playerText.color = colors[id-1];
+        playerText.text = "You are " + colorNames[id - 1];
     }
     public void ResourceUse(int id)
     {
@@ -65,8 +70,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
             }
         }  
     }
+    [PunRPC]
+    public void LoseGame()
+    {
+        hasLost = true;
+        Debug.Log("Lose");
+        GameManager.instance.players.Remove(this);
+        GameManager.instance.photonView.RPC("SubtractPlayers", RpcTarget.All);
+        GameManager.instance.photonView.RPC("checkWinCondition", RpcTarget.All);
+        PhotonNetwork.LeaveRoom();
+        GameManager.instance.LoadLoseScreen();
+    }
     public void Update()
     {
         resouceText.text = "Food Left: " + resource;
+        
     }
 }

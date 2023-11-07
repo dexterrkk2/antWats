@@ -11,16 +11,19 @@ public class AntClass : MonoBehaviourPunCallbacks
     public bool secondClick = false;
     public int _playerClan;
     public int hp;
+    int maxHp;
     public int damageRadius = 4;
     public Vector3 futurePosition;
     public int futureDamage;
     public int combatMod;
     public MeshRenderer mesh;
+    public GameObject HealthBarValue;
     [PunRPC]
     public void AssignType(int playerClan)
     {
         _playerClan = playerClan;
         type = types[playerClan];
+        maxHp = hp;
     }
     public void OnMouseDown()
     {
@@ -34,6 +37,7 @@ public class AntClass : MonoBehaviourPunCallbacks
     public void TakeDamage()
     {
         hp -= futureDamage;
+        HealthBarValue.transform.localScale = new Vector3(hp/maxHp, 1, 1);
     }
     public void Move(Vector3 targetSquare, int playerClan, float maxDistance, float moveSpeed)
     {

@@ -8,7 +8,7 @@ public class BiteAndScratch : Skill
     {
         for (int i = 0; i < player.soldiers.Count; i++)
         {
-            player.soldiers[i].damageRadius *= 2;
+            player.soldiers[i].combatMod += 1;
         }
     }
 }

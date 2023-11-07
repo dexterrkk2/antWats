@@ -14,6 +14,7 @@ public class AntBehavior : AntClass
     {
         antCam.gameObject.SetActive(false);
         AssignType(photonView.OwnerActorNr - 1); ;
+        player = GameManager.instance.players[_playerClan];
         colorChange.color = colors[photonView.OwnerActorNr - 1];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
         mesh = colorChange.meshRenderer;

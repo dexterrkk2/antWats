@@ -59,12 +59,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 ResourceSpawn();
             }
-            for (int i =0; i< players.Count; i++)
-            {
-                Base playerBase = SpawnBase(i);
-                playerBase.id = i;
-                bases.Add(playerBase);
-            }
         }
         if (photonView != null)
         {
@@ -79,6 +73,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (playersInGame == PhotonNetwork.PlayerList.Length)
         {
             int id = SpawnPlayer();
+            Base playerBase = SpawnBase(id-1);
+            //playerBase.id = id-1;
+            bases.Add(playerBase);
         }
     }
     int SpawnPlayer()
@@ -157,7 +154,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         tiles[futurex, futurez].ant = ant;
         if (tiles[futurex, futurez].Base != null && tiles[futurex, futurez].Base.id != ant._playerClan)
         {
-            LoseGame(players[tiles[futurex, futurez].Base.id]);
+            Debug.Log("Player Lose:" + players[tiles[futurex, futurez].Base.id].id);
+            players[tiles[futurex, futurez].Base.id].photonView.RPC("LoseGame", players[tiles[futurex, futurez].Base.id].photonPlayer); ;
         }
     }
     public void Combat(AntClass ant1, AntClass ant2)
@@ -186,21 +184,14 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log("ant died: " + ant2);
         }
     }
-    /*public void UpdateAnts(int id)
+    /*public void UpdateBases()
     {
-        ants.Clear();
-        AntBehavior[] temp = (AntBehavior[])FindObjectsOfType(typeof(AntBehavior));
-        for (int i = 0; i < temp.Length; i++)
+        for(int i =0; i<players.Count; i++)
         {
-            ants.Add(temp[i]);
-        }
-    }
-    public void UpdateBases()
-    {
-        Base[] Base = FindObjectsOfType<Base>();
-        for (int i = 0; i < Base.Length; i++)
-        {
-            bases.Add(Base[i]);
+            int x = Mathf.RoundToInt(BasePoints[i].position.x / grid.scale);
+            int z = Mathf.RoundToInt(BasePoints[i].position.z / grid.scale);
+            tiles[x,z].Base = bases[];
+            tiles[Mathf.RoundToInt(BasePoints[i].position.x / grid.scale), Mathf.RoundToInt(BasePoints[i].position.z / grid.scale)].Base.id = i;
         }
     }*/
     [PunRPC]
@@ -266,15 +257,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                }
            }
        }*/
-    [PunRPC]
-    public void LoseGame(PlayerController playerController)
-    {
-        playerController.hasLost = true;
-        photonView.RPC("SubtractPlayers", RpcTarget.All);
-        photonView.RPC("checkWinCondition", RpcTarget.All);
-        PhotonNetwork.LeaveRoom();
-        LoadScene(loseSceneNumber);
-    }
     public void BackToMenu()
     {
         LoadScene(0);
@@ -297,6 +279,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void LoadScene(int sceneNumber)
     {
         PhotonNetwork.LoadLevel(sceneNumber);
+    }
+    public void LoadLoseScreen() 
+    {
+        LoadScene(loseSceneNumber);
     }
     [PunRPC]
     public void SubtractPlayers()
