@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2990137708433227375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614600576547927470}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1614600576547927470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990137708433227375}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7150062, z: -0, w: 0.69911814}
+  m_LocalPosition: {x: -5.317288, y: 0.9948345, z: 2.5853972}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8213965014489717153}
+  m_Father: {fileID: 341130825192604760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5898163179489744423
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,12 +59,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5898163179489744423}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 0.13, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.7150062, z: -0, w: 0.69911814}
+  m_LocalPosition: {x: 2.2603745, y: -0.52, z: 5.3893604}
+  m_LocalScale: {x: 1.0011599, y: 1, z: 0.99884015}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 341130825192604760}
+  m_Father: {fileID: 1614600576547927470}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4907901563452608434
 MeshFilter:
@@ -134,11 +166,11 @@ Transform:
   m_GameObject: {fileID: 6213795842492351527}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7150062, z: -0, w: 0.69911814}
-  m_LocalPosition: {x: -0.508, y: 0.37, z: 0.115}
+  m_LocalPosition: {x: -0.508, y: 0.387, z: 0.115}
   m_LocalScale: {x: 0.104540005, y: 0.104540005, z: 0.039094824}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8213965014489717153}
+  - {fileID: 1614600576547927470}
   m_Father: {fileID: 2960833940534713436}
   m_LocalEulerAnglesHint: {x: 0, y: -91.287, z: 0}
 --- !u!33 &1264071078852767896
@@ -438,13 +470,13 @@ MonoBehaviour:
   selected: 0
   secondClick: 0
   _playerClan: 0
-  hp: 100
+  hp: 50
   damageRadius: 100
   futurePosition: {x: 0, y: 0, z: 0}
   futureDamage: 0
   combatMod: 0
   mesh: {fileID: 0}
-  HealthBarValue: {fileID: 5898163179489744423}
+  HealthBarValue: {fileID: 2990137708433227375}
   antCam: {fileID: 5515362876606701709}
   colors:
   - {r: 0.11372546, g: 0.15897356, b: 0.8980392, a: 0}

@@ -84,6 +84,5 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void Update()
     {
         resouceText.text = "Food Left: " + resource;
-        
     }
 }

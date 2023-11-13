@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using TMPro;
 public class TechTree : MonoBehaviour
 {
-    public List<Skill> skillTree;
     public PlayerController player;
-    public Button prefab;
-    public List<Button> buttons;
+    public List<Skill> skillTree;
+    public List<GameObject> buttons;
+    public List<TextMeshProUGUI> descriptions;
     public void Start()
     {
         CreateTree();
@@ -33,11 +33,12 @@ public class TechTree : MonoBehaviour
             {
                 skillTree[i].left = skillTree[((i + 1) * 2) - 1];
             }
-            CreateButton(skillTree[i], buttons[i]);
+            CreateButton(skillTree[i], buttons[i], descriptions[i]);
         }
     }
-    public void CreateButton(Skill skill, Button button)
+    public void CreateButton(Skill skill, GameObject ability, TextMeshProUGUI description)
     {
+        Button button = ability.GetComponentInChildren<Button>();
         button.onClick.AddListener(() => skill.ButtonClick());
         button.name = skill.name;
         TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
@@ -46,5 +47,6 @@ public class TechTree : MonoBehaviour
             buttonText.text = skill.name + " " + skill.cost;
         }
         button.transform.SetParent(transform);
+        description.text = skill.description;
     }
 }

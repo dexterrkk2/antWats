@@ -10,8 +10,8 @@ public class AntClass : MonoBehaviourPunCallbacks
     public bool selected = false;
     public bool secondClick = false;
     public int _playerClan;
-    public int hp;
-    int maxHp;
+    public float hp;
+    float maxHp;
     public int damageRadius = 4;
     public Vector3 futurePosition;
     public int futureDamage;
@@ -37,7 +37,7 @@ public class AntClass : MonoBehaviourPunCallbacks
     public void TakeDamage()
     {
         hp -= futureDamage;
-        HealthBarValue.transform.localScale = new Vector3(hp/maxHp, 1, 1);
+        HealthBarValue.transform.localScale = new Vector3(1, 1, (hp/maxHp));
     }
     public void Move(Vector3 targetSquare, int playerClan, float maxDistance, float moveSpeed)
     {

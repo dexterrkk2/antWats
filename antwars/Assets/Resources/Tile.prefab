@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mats:
   - {fileID: 7850208690685235897}
+  - {fileID: 4185324706527741306}
   ant: {fileID: 0}
   resource: {fileID: 0}
   Base: {fileID: 0}
@@ -225,6 +226,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a9a461e87f525448a31e43575cc1c4e, type: 3}
+--- !u!23 &4185324706527741306 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4937918540377494556, guid: 3a9a461e87f525448a31e43575cc1c4e, type: 3}
+  m_PrefabInstance: {fileID: 9120422999043117414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &7850208690685235897 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7898245764005051425, guid: 3a9a461e87f525448a31e43575cc1c4e, type: 3}
