@@ -6,6 +6,6 @@ public class BigBrain : Skill
 {
     public override void Upgrade()
     {
-        Debug.Log("Big Brain");
+        
     }
 }

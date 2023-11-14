@@ -6,6 +6,5 @@ public class Tools : Skill
 {
     public override void Upgrade()
     {
-        Debug.Log("Tool");
     }
 }

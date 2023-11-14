@@ -18,6 +18,8 @@ public class AntBehavior : AntClass
         colorChange.color = colors[photonView.OwnerActorNr - 1];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
         mesh = colorChange.meshRenderer;
+        player = GameManager.instance.players[_playerClan];
+        player.soldiers.Add(this);
     }
     public void Update()
     {

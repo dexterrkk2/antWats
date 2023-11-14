@@ -6,6 +6,5 @@ public class Hierarchy : Skill
 {
     public override void Upgrade()
     {
-        Debug.Log("Hierarchy");
     }
 }

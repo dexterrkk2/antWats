@@ -43,7 +43,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Inspector
   m_RootView: {fileID: 9}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_MinSize: {x: 640, y: 601}
   m_MaxSize: {x: 4000, y: 4021}
   vertical: 0
-  controlID: 51016
+  controlID: 7544
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 101
+  controlID: 182
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,8 +168,8 @@ MonoBehaviour:
     y: 0
     width: 367
     height: 590
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 41
+  controlID: 137
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 42
+  controlID: 138
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -344,8 +344,8 @@ MonoBehaviour:
     y: 0
     width: 1137
     height: 590
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -1675,7 +1675,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/Scripts/AntScripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1685,16 +1685,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources
+  - Assets/Scripts/AntScripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Homework\Game Engine 3\ant wars\antWats\antwars
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 12}
-    m_SelectedIDs: 02610000
-    m_LastClickedID: 24834
-    m_ExpandedIDs: 00000000f2600000066100004661000000ca9a3bffffff7f
+    m_SelectedIDs: 4c610000
+    m_LastClickedID: 24908
+    m_ExpandedIDs: 00000000fe6000001a6100005261000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1722,7 +1722,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f2600000
+    m_ExpandedIDs: 00000000fe600000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1868,21 +1868,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 7223edfec223edfeaa26edfeb426edfebc26edfee226edfede873dff2c883dff128b3dff1c8b3dff248b3dff4a8b3dffd69a3dffe09a3dff129b3dfff44340fff84340ff044440ff98bf43ffb4c643ff02c743ffe8c943fff2c943fffac943ff20ca43fffe114aff30124aff743550ff883c50ffd83c50ffbe3f50ffc83f50ffd03f50fff63f50ff7a4a50ffac4a50ff2a6f56ff42a55cff74a55cff38c962ff66d062ffb8d062ff9ed362ffa8d362ffb0d362ffd6d362ff820d69ffd20d69ffb81069ffc21069ffca1069fff01069ffba7275ff0a7375fff07575fffa7575ff027675ff287675fff6d081ff46d181ff2cd481ff36d481ff3ed481ff64d481ff9a2b8effb02f8effb05ca0ff005da0ff2a5da0ff425da0ff322aa6ff8ebeedffbabeedff34bfedff4cbfedff3c8cf3fffca2f3ff14a3f3ff0470f9ff5671f9ffac22faff1efbffff905f0000ae5f0000b25f0000466000004a600000ccae0000eaae0000eeae000082af000086af0000b8fe04006eff040072ff0400441f05000c310500
+      m_ExpandedIDs: ceb5e5ff84d8ebff7004f2ffc204f2ff340bf2ff840bf2ff440ef2ff4e0ef2ff560ef2ff820ef2ff7818f2ffc818f2ffb01bf2ffba1bf2ffc21bf2ffee1bf2ff7e25f2ff8048f8ff6c53f8ff8c53f8ffac53f8ffd654f8fffc5bf8ff8660f8ff7662f8ffc462f8ff4867f8ff9868f8ffde68f8ff12fbffffc0e60000cee6000002e7000042e7000086e700008ce70000ace70000b0e700003cf500001cf6000020f60000ecf90000ccfa0000d0fa00001408010018080100d6080100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: AudioManager
+        m_OriginalName: AudioManager
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 59270
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 7}
       m_SearchString: 
@@ -2251,9 +2251,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 284.6834, y: -0.27774572, z: 27.761702}
+    m_Target: {x: -0.7988298, y: 0.65880847, z: 90.0731}
     speed: 2
-    m_Value: {x: 284.6834, y: -0.27774572, z: 27.761702}
+    m_Value: {x: -0.7988298, y: 0.65880847, z: 90.0731}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -2299,13 +2299,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.3226849, y: -0.32627764, z: 0.11958597, w: -0.88041884}
+    m_Target: {x: -0.15703125, y: -0.039396323, z: 0.00626821, w: -0.9867945}
     speed: 2
-    m_Value: {x: -0.32268158, y: -0.32627425, z: 0.11958473, w: -0.8804097}
+    m_Value: {x: -0.15703021, y: -0.03939606, z: 0.006268168, w: -0.98678786}
   m_Size:
-    m_Target: 4.514762
+    m_Target: 3.603005
     speed: 2
-    m_Value: 4.514762
+    m_Value: 3.603005
   m_Ortho:
     m_Target: 0
     speed: 2

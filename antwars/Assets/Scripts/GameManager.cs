@@ -94,11 +94,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         AntBehavior ant = antObject.GetComponent<AntBehavior>();
         //Debug.Log("playerid" + id);
         //Debug.Log("ant id" + ant._playerClan);
-        if (id == ant._playerClan)
-        {
-            ant.player = players[id];
-            players[id].soldiers.Add(ant);
-        }
     }
     [PunRPC]
     public Base SpawnBase(int num)
