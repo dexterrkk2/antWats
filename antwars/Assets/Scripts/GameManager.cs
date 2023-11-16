@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Grid grid;
     public int resourceNum;
     public Tile[,] tiles;
+    public Vector3 antOffset;
     void Awake()
     {
         // instance
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void antSpawner(int id)
     {
-        GameObject antObject =PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position, Quaternion.identity);
+        GameObject antObject =PhotonNetwork.Instantiate(antPrefab, BasePoints[id].position +grid.offset/4, Quaternion.identity);
         AntBehavior ant = antObject.GetComponent<AntBehavior>();
         //Debug.Log("playerid" + id);
         //Debug.Log("ant id" + ant._playerClan);
@@ -150,7 +151,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (tiles[futurex, futurez].Base != null && tiles[futurex, futurez].Base.id != ant._playerClan)
         {
             Debug.Log("Player Lose:" + players[tiles[futurex, futurez].Base.id].id);
-            players[tiles[futurex, futurez].Base.id].photonView.RPC("LoseGame", players[tiles[futurex, futurez].Base.id].photonPlayer); ;
+            tiles[futurex, futurez].Base.photonView.RPC("TakeDamage", RpcTarget.All);
+            if (tiles[futurex, futurez].Base.baseHp == 0)
+            {
+                players[tiles[futurex, futurez].Base.id].photonView.RPC("LoseGame", players[tiles[futurex, futurez].Base.id].photonPlayer);
+            }
         }
     }
     public void Combat(AntClass ant1, AntClass ant2)
