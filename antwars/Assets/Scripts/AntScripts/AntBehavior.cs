@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 public class AntBehavior : AntClass
 {
     public Camera antCam;
@@ -10,6 +11,7 @@ public class AntBehavior : AntClass
     public float maxDistance;
     public float moveSpeed;
     public ColorChange colorChange;
+    public TextMeshProUGUI playerNameText;
     public void Start()
     {
         antCam.gameObject.SetActive(false);
@@ -18,7 +20,7 @@ public class AntBehavior : AntClass
         colorChange.color = colors[photonView.OwnerActorNr - 1];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
         mesh = colorChange.meshRenderer;
-        player = GameManager.instance.players[_playerClan];
+        playerNameText.text = player.nickName;
         player.soldiers.Add(this);
     }
     public void Update()

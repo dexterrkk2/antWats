@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
     Base Base;
     public float FoodScaleFactor =1;
     public float foodUseFactor = 1;
-    public TextMeshProUGUI playerText;
-    public List<Color> colors;
     public List<string> colorNames;
     public void OnEnable()
     {
@@ -38,6 +36,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         photonPlayer = player;
         id = player.ActorNumber;
         GameManager.instance.players[id-1] = this;
+        nickName = PhotonNetwork.PlayerList[id - 1].NickName;
         if (!photonView.IsMine)
         {
             gameObject.SetActive(false);
@@ -49,8 +48,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
             transform.position = startPosition.transform.position;
         }
         mouse.playerClan = id - 1;
-        playerText.color = colors[id-1];
-        playerText.text = "You are " + colorNames[id - 1];
     }
     public void ResourceUse(int id)
     {
