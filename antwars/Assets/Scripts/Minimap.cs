@@ -42,14 +42,14 @@ public class Minimap : MonoBehaviourPunCallbacks
             }
         }
     }
-    public void UpdateTile(int pastx, int pastz, int futurex ,int futurez)
+    public void UpdateTile(int x, int z)
     {
-        positionx = pastx;
-        positionz = pastz;
-        TileColorPicker();
-        positionx = futurex;
-        positionz = futurez;
-        TileColorPicker();
+        positionx = x;
+        positionz = z;
+        if (photonView.IsMine)
+        {
+            TileColorPicker();
+        }
     }
     [PunRPC]
     void TileColorPicker()

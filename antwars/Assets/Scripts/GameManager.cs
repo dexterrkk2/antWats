@@ -155,7 +155,8 @@ public class GameManager : MonoBehaviourPunCallbacks
                 players[tiles[futurex, futurez].Base.id].photonView.RPC("LoseGame", players[tiles[futurex, futurez].Base.id].photonPlayer);
             }
         }
-        players[ant._playerClan].minimap.UpdateTile(pastx, pastz, futurex, futurez);
+        players[ant._playerClan].minimap.UpdateTile(pastx, pastz);
+        players[ant._playerClan].minimap.UpdateTile(futurex, futurez);
     }
     public void Combat(AntClass ant1, AntClass ant2)
     {

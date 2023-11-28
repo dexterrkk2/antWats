@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Inspector
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 101
+  controlID: 87
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1543,7 +1543,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1553,16 +1553,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Homework\Game Engine 3\ant wars\antWats\antwars
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 4a610000
-    m_LastClickedID: 24906
-    m_ExpandedIDs: 000000003a6100004e61000000ca9a3bffffff7f
+    m_SelectedIDs: 28620000
+    m_LastClickedID: 25128
+    m_ExpandedIDs: 000000003a61000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1615,8 +1615,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 8442f6ff
+    m_LastClickedInstanceID: -638332
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300009c8a00006e650000a8ee05ff007a000000000000
     m_RenameOverlay:
@@ -1736,7 +1736,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: fe229efe4e239efe38269efe42269efe4a269efe76269efe0890aafe0c90aafe1890aafe3090aafe3490aafe4090aafe5890aafe5c90aafe6890aafea89faafeac9faafeb89faafed09faafed49faafee09faafef89faafefc9faafe08a0aafe48afaafe4cafaafe58afaafe70afaafe74afaafe80afaafe98afaafe9cafaafea8afaafec0beaafec4beaafed0beaafee8beaafeecbeaafef8beaafe10bfaafe14bfaafe20bfaafe38bfaafe3cbfaafe48bfaafe60ceaafe64ceaafe70ceaafe88ceaafe8cceaafe98ceaafe2cf6acfe8e61d9fec068d9fe0e69d9fef86bd9fe026cd9fe0a6cd9fe366cd9fe36e3e0feac0bf7fe5c24f7fe7624f7fe9024f7fe4641fdfe84a904ff86150cffb07d13ff9ee91aff2a5222ffda6322ff2a6422ff146722ff1e6722ff266722ff546722ff34252bff4e252bff68252bff1c4231ffe8aa32ff02ab32ff1cab32ffd0c738ff288640ff428640ff5c8640ff10a346ffe6014eff7cc45cff382b64ff98f872ffd6f972ff100e73ffee6c7affa21283ffc41983ff121a83fffc1c83ff061d83ff0e1d83ff3a1d83ff0e6694ff346d94ff826d94ff6c7094ff767094ff7e7094ffaa7094ffd0d3b5ff1ed4b5ff08d7b5ff12d7b5ff1ad7b5ff46d7b5ff2422c7ff4acccfff68d3cfffb6d3cfffa0d6cfffaad6cfffb2d6cfffded6cfffea80d8ff0c88d8ff5a88d8ff448bd8ff4e8bd8ff568bd8ff828bd8fff62de1ff1efbfffff4ffffffec900100
+      m_ExpandedIDs: ba22f1ff8842f6ff8c42f6ff9842f6ffa052f6ffa452f6ffb052f6ffbc89f8ff54bbfdff58bbfdff64bbfdffc8f2ffff1efbffffb6650000106f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
