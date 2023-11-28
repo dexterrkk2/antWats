@@ -26,19 +26,23 @@ public class Grid : MonoBehaviourPunCallbacks
                 {
                     colorCounter=1;
                 }
-                Tile spawnedTile = Instantiate(tilePrefab, gridParent);
-                spawnedTile.transform.position = new Vector3(x, 1 - (scale * 1.5f), z);
-                spawnedTile.TIleColor(colors[colorCounter]);
-                spawnedTile.transform.localScale = new Vector3(scale, scale, scale);
-                colorCounter=0;
-                GameManager.instance.tiles[x/scale, z/scale] = spawnedTile;
-                spawnedTile.name += x/scale + " ";
-                spawnedTile.name += z/scale;
+                SpawnTile(x,z);
             }
         }
         Corners[0].position = new Vector3(+offset.x, -3, +offset.z);
         Corners[1].position = new Vector3(width * scale - offset.x, -3, +offset.z);
         Corners[2].position = new Vector3(+offset.x, -3, height * scale - offset.z);
         Corners[3].position = new Vector3(width*scale-offset.x, -3, height * scale - offset.z);
+    }
+    void SpawnTile(int x, int z)
+    {
+        Tile spawnedTile = Instantiate(tilePrefab, gridParent);
+        spawnedTile.transform.position = new Vector3(x, 1 - (scale * 1.5f), z);
+        spawnedTile.TIleColor(colors[colorCounter]);
+        spawnedTile.transform.localScale = new Vector3(scale, scale, scale);
+        colorCounter = 0;
+        GameManager.instance.tiles[x / scale, z / scale] = spawnedTile;
+        spawnedTile.name += x / scale + " ";
+        spawnedTile.name += z / scale;
     }
 }

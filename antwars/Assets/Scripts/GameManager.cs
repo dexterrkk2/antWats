@@ -47,11 +47,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         PlayerController[] temp = new PlayerController[PhotonNetwork.PlayerList.Length];
-        for (int i = 0; i < temp.Length; i++)
-        {
-            players.Add(temp[i]);
-            alivePlayers++;
-        }
+        players = temp.ToList();
         tiles = new Tile[grid.height, grid.width];
         if (photonView.IsMine)
         {
@@ -123,7 +119,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         return players.First(x => x.gameObject == playerObject);
     }
-    public void AntCheck(AntBehavior ant)
+    public void AntCheck(AntClass ant)
     {
         int pastx = (int)Mathf.Round(ant.transform.position.x / grid.scale);
         int pastz = (int)Mathf.Round(ant.transform.position.z / grid.scale);
@@ -135,6 +131,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.Log(tiles[futurex, futurez].name + " ant id:" + tiles[futurex, futurez].ant._playerClan);
         }*/
+
         if (tiles[futurex, futurez].resource != null)
         {
             players[ant._playerClan].resource += 1 * players[ant._playerClan].FoodScaleFactor;
@@ -150,13 +147,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         tiles[futurex, futurez].ant = ant;
         if (tiles[futurex, futurez].Base != null && tiles[futurex, futurez].Base.id != ant._playerClan)
         {
-            Debug.Log("Player Lose:" + players[tiles[futurex, futurez].Base.id].id);
             tiles[futurex, futurez].Base.photonView.RPC("TakeDamage", RpcTarget.All);
-            if (tiles[futurex, futurez].Base.baseHp == 0)
+            Debug.Log("Base hp " + tiles[futurex, futurez].Base.baseHp);
+            if (tiles[futurex, futurez].Base.baseHp <= 0)
             {
+                Debug.Log("Player Lose:" + players[tiles[futurex, futurez].Base.id].id);
                 players[tiles[futurex, futurez].Base.id].photonView.RPC("LoseGame", players[tiles[futurex, futurez].Base.id].photonPlayer);
             }
         }
+        players[ant._playerClan].minimap.UpdateTile(pastx, pastz, futurex, futurez);
     }
     public void Combat(AntClass ant1, AntClass ant2)
     {
@@ -174,6 +173,8 @@ public class GameManager : MonoBehaviourPunCallbacks
                 ant1.futureDamage = ant2.damage;
                 ant1.photonView.RPC("TakeDamage", RpcTarget.All);
             }
+            Debug.Log("ant 1 " +ant1.hp);
+            Debug.Log("ant 2 " +ant2.hp);
         }
         if (ant1.hp <= 0)
         {

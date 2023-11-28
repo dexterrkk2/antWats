@@ -20,7 +20,7 @@ public class AntBehavior : AntClass
         colorChange.color = colors[photonView.OwnerActorNr - 1];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
         mesh = colorChange.meshRenderer;
-        playerNameText.text = player.nickName;
+        playerNameText.text = player.nickName + "'s ant";
         player.soldiers.Add(this);
     }
     public void Update()
@@ -28,7 +28,6 @@ public class AntBehavior : AntClass
         if (selected)
         {
             Move(MousePosition.mousePosition, player.mouse.playerClan, maxDistance, moveSpeed);
-            GameManager.instance.AntCheck(this);
         }
         if (hp <= 0)
         {

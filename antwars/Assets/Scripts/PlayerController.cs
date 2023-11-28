@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public float FoodScaleFactor =1;
     public float foodUseFactor = 1;
     public List<string> colorNames;
+    public Minimap minimap;
     public void OnEnable()
     {
         AntSpawner.onSpawn += ResourceUse;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             startPosition = GameManager.instance.BasePoints[id - 1].gameObject;
             transform.position = startPosition.transform.position;
         }
+        //minimap.SpawnMiniMap(GameManager.instance.grid.width, GameManager.instance.grid.height);
         mouse.playerClan = id - 1;
     }
     public void ResourceUse(int id)

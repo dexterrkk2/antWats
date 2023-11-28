@@ -61,6 +61,7 @@ public class AntClass : MonoBehaviourPunCallbacks
                         futurePosition = targetSquare;
                         transform.LookAt(futurePosition);
                         GameManager.instance.damageTime = time;
+                        GameManager.instance.AntCheck(this);
                     }
                     else
                     {
