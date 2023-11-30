@@ -1351,6 +1351,7 @@ MonoBehaviour:
   player: {fileID: 6160012335028575400}
   minimapSpot: {x: 574, y: -254, z: 0}
   scale: 5
+  updateRange: 5
 --- !u!114 &2470872644224159525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2510,7 +2511,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Click here to summon an ant soldier. When summoned click on it then click
-    on the map to move it.
+    on the ground to move it.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

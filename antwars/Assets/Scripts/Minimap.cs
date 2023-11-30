@@ -16,6 +16,7 @@ public class Minimap : MonoBehaviourPunCallbacks
     int positionx;
     int positionz;
     public int scale;
+    public int updateRange;
     private void Start()
     {
         SpawnMiniMap(GameManager.instance.grid.width, GameManager.instance.grid.height);
@@ -37,18 +38,30 @@ public class Minimap : MonoBehaviourPunCallbacks
                 {
                     positionx = x;
                     positionz = y;
-                    TileColorPicker();
+                    //TileColorPicker();
                 }
             }
         }
     }
     public void UpdateTile(int x, int z)
     {
-        positionx = x;
-        positionz = z;
-        if (photonView.IsMine)
+        for (int i = 0; i < updateRange; i++) 
         {
-            TileColorPicker();
+            for (int j = 0; j < updateRange; j++)
+            {
+                positionx = x + i;
+                positionz = z + j;
+                if (photonView.IsMine)
+                {
+                    TileColorPicker();
+                }
+                positionx = x - i;
+                positionz = z - j;
+                if (photonView.IsMine)
+                {
+                    TileColorPicker();
+                }
+            }
         }
     }
     [PunRPC]
