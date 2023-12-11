@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 public class AntClass : MonoBehaviourPunCallbacks
 {
     public string type;
     public List<string> types;
-    public int damage;
     public bool selected = false;
     public bool secondClick = false;
     public int _playerClan;
@@ -14,30 +14,29 @@ public class AntClass : MonoBehaviourPunCallbacks
     float maxHp;
     public int damageRadius = 4;
     public Vector3 futurePosition;
-    public int futureDamage;
+    public Vector3 pastPosition;
+    public int attackTimes;
     public int combatMod;
     public MeshRenderer mesh;
-    public GameObject HealthBarValue;
+    public Slider HealthBarValue;
     [PunRPC]
     public void AssignType(int playerClan)
     {
         _playerClan = playerClan;
         type = types[playerClan];
         maxHp = hp;
+        HealthBarValue.maxValue = maxHp;
+        HealthBarValue.value = maxHp;
     }
     public void OnMouseDown()
     {
         selected = true;
     }
-    public void AssignDamage(int damage)
-    {
-        futureDamage = damage;
-    }
     [PunRPC]
     public void TakeDamage()
     {
-        hp -= futureDamage;
-        HealthBarValue.transform.localScale = new Vector3(1, 1, (hp/maxHp));
+        hp -= 5;
+        HealthBarValue.value = hp;
     }
     public void Move(Vector3 targetSquare, int playerClan, float maxDistance, float moveSpeed)
     {
@@ -55,13 +54,14 @@ public class AntClass : MonoBehaviourPunCallbacks
                             targetSquare = transform.position + moveDirection * maxDistance;
                         }
                         float time = (targetSquare-transform.position).magnitude/ moveSpeed/5;
-                        StartCoroutine(MoveDuration(transform.position, targetSquare, time));
-                        selected = false;
-                        secondClick = false;
+                        //selected = false;
+                        //secondClick = false;
                         futurePosition = targetSquare;
+                        GameManager.instance.AntCheck(this);
+                        StartCoroutine(MoveDuration(transform.position, targetSquare, time));
                         transform.LookAt(futurePosition);
                         GameManager.instance.damageTime = time;
-                        GameManager.instance.AntCheck(this);
+                        pastPosition = futurePosition;
                     }
                     else
                     {

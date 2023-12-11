@@ -15,13 +15,23 @@ public class AntBehavior : AntClass
     public void Start()
     {
         antCam.gameObject.SetActive(false);
-        AssignType(photonView.OwnerActorNr - 1); ;
+        AssignType(photonView.OwnerActorNr - 1); 
         player = GameManager.instance.players[_playerClan];
+        AssignStats();
         colorChange.color = colors[photonView.OwnerActorNr - 1];
         colorChange.photonView.RPC("SetColor", RpcTarget.AllBuffered);
         mesh = colorChange.meshRenderer;
         playerNameText.text = player.nickName + "'s ant";
         player.soldiers.Add(this);
+    }
+    public void AssignStats()
+    {
+        hp = player.antstats.hp;
+        combatMod = player.antstats.hp;
+        moveSpeed = player.antstats.moveSpeed;
+        attackTimes = player.antstats.attackTimes;
+        transform.localScale = new Vector3(player.antstats.scale, player.antstats.scale, player.antstats.scale);
+        AssignType(_playerClan);
     }
     public void Update()
     {
@@ -33,11 +43,18 @@ public class AntBehavior : AntClass
         {
             photonView.RPC("Die", RpcTarget.All);
         }
+        if (Input.GetKeyDown("d"))
+        {
+            Debug.Log("Pressed d");
+            selected = false;
+            secondClick = false;
+        }
     }
     [PunRPC]
     public void Die()
     {
         gameObject.SetActive(false);
         GameManager.instance.ants.Remove(this);
+        player.soldiers.Remove(this);
     }
 }

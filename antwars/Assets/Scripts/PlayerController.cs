@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public float foodUseFactor = 1;
     public List<string> colorNames;
     public Minimap minimap;
+    public AntStats antstats;
     public void OnEnable()
     {
         AntSpawner.onSpawn += ResourceUse;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         photonPlayer = player;
         id = player.ActorNumber;
         GameManager.instance.players[id-1] = this;
+        GameManager.instance.alivePlayers++;
         nickName = PhotonNetwork.PlayerList[id - 1].NickName;
         if (!photonView.IsMine)
         {
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
                 if(i%2 == 0)
                 {
-                    soldiers.RemoveAt(i);
+                    //soldiers[i].Die();
                 }
             }
         }  
@@ -83,5 +85,17 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void Update()
     {
         resouceText.text = "Food Left: " + resource;
+        if (Input.GetKeyDown("g"))
+        {
+            SelectAllAnts();
+        }
+    }
+    void SelectAllAnts()
+    {
+        for (int i=0; i< soldiers.Count; i++)
+        {
+            soldiers[i].selected = true;
+            soldiers[i].secondClick = true;
+        }
     }
 }

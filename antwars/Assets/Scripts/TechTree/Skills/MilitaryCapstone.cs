@@ -6,9 +6,10 @@ public class MilitaryCapstone : Skill
 {
     public override void Upgrade()
     {
+        player.antstats.attackTimes += 1;
         for (int i = 0; i < player.soldiers.Count; i++)
         {
-            player.soldiers[i].damage *= 2;
+            player.soldiers[i].AssignStats();
         }
     }
 }

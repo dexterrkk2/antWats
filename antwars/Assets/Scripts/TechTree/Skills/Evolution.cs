@@ -6,9 +6,10 @@ public class Evolution : Skill
 {
     public override void Upgrade()
     {
-        for( int i =0; i<player.soldiers.Count; i++)
+        player.antstats.moveSpeed *= 1.5f;
+        for (int i = 0; i < player.soldiers.Count; i++)
         {
-            player.soldiers[i].moveSpeed *= 2;
+            player.soldiers[i].AssignStats();
         }
     }
 }

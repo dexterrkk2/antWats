@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -11,11 +12,13 @@ public class Base : MonoBehaviourPunCallbacks
     public int id;
     public int baseHp;
     public int maxHp;
-    public GameObject healthBarValue;
+    public Slider healthBarValue;
     private void Start()
     {
         photonView.RPC("AssignBase", RpcTarget.All);
         maxHp = baseHp;
+        healthBarValue.maxValue = maxHp;
+        healthBarValue.value = maxHp;
     }
     [PunRPC]
     void AssignBase()
@@ -31,6 +34,6 @@ public class Base : MonoBehaviourPunCallbacks
     void TakeDamage()
     {
         baseHp--;
-        healthBarValue.transform.localScale = new Vector3(1, 1, (baseHp / maxHp));
+        healthBarValue.value = baseHp;
     }
 }

@@ -51,13 +51,19 @@ public class Minimap : MonoBehaviourPunCallbacks
             {
                 positionx = x + i;
                 positionz = z + j;
-                if (photonView.IsMine)
+                bool upperBound = positionx < GameManager.instance.grid.width && positionz < GameManager.instance.grid.height;
+                bool lowerBound = positionx >= 0 && positionz >= 0;
+                bool inBounds = upperBound & lowerBound;
+                if (inBounds && photonView.IsMine)
                 {
                     TileColorPicker();
                 }
                 positionx = x - i;
                 positionz = z - j;
-                if (photonView.IsMine)
+                upperBound = positionx < GameManager.instance.grid.width && positionz < GameManager.instance.grid.height;
+                lowerBound = positionx >= 0 && positionz >= 0;
+                inBounds = upperBound & lowerBound;
+                if (inBounds && photonView.IsMine)
                 {
                     TileColorPicker();
                 }
@@ -67,8 +73,12 @@ public class Minimap : MonoBehaviourPunCallbacks
     [PunRPC]
     void TileColorPicker()
     {
-        bool antonTile = GameManager.instance.tiles[positionx, positionz].ant;
-        bool baseOnTile = GameManager.instance.tiles[positionx, positionz].Base;
+        
+        //Debug.Log("Position X: " + positionx);
+        //Debug.Log("Position Z: " + positionz);
+        bool antonTile = GameManager.instance.tiles[positionx, positionz].ant != null;
+        //Debug.Log("ant on tile: " +antonTile + "Tile: " + positionx +" " +positionz);
+        bool baseOnTile = GameManager.instance.tiles[positionx, positionz].Base != null;
         //Debug.Log("x" + x);
         // Debug.Log("z" + z);
         //Debug.Log(mapSquares[x,z]);
